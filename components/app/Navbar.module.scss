@@ -1,0 +1,14 @@
+@import url('/styles/scss/reusables.scss');
+
+.navbar{
+    background-color: $purple3;
+    height: 100px;
+    .navbar_logo{
+        height: 103px;
+        width: 103px;
+        // @include media($mobile){
+        //     display:none;
+        //     width: 0;
+        // }
+    }
+}

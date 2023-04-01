@@ -1,0 +1,17 @@
+//VARIABLES:
+    //media_queries
+    $mobile:767px;
+    $tablet:1023px;
+
+    //colors
+    $purple3:#373B53;
+    $purple7:#7C5DFA;
+    $purple9:#9277FF;
+    
+//MIXINS:
+    //media_queries
+    @mixin media($max-width){
+        @media (max-width:$max-width){
+            @content
+        }
+    }
