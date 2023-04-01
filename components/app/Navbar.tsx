@@ -12,6 +12,17 @@ export default function Navbar() {
             alt={'navbar_logo'} 
             className={styles.navbar_logo}  
         />
+        <div className={styles.navbar_theme__profile} >
+            <i className={`fa-solid fa-${false? "moon":'sun'}`}></i>
+            <div className={styles.profile}>
+                <Image 
+                    src={'/image-avatar.jpg'}
+                    alt='s'
+                    width={40}
+                    height={40}
+                />
+            </div>
+        </div>
     </div>
   )
 }

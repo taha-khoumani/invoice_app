@@ -4,14 +4,19 @@
     $tablet:1023px;
 
     //colors
-    $purple3:#373B53;
-    $purple7:#7C5DFA;
-    $purple9:#9277FF;
-    
+    $purple53:#373B53;
+    $purpleFA:#7C5DFA;
+    $purpleFF:#9277FF;
+    $purpleC3:#7E88C3;
 //MIXINS:
     //media_queries
-    @mixin media($max-width){
-        @media (max-width:$max-width){
+    @mixin media_mobile(){
+        @media (max-width:$mobile){
+            @content
+        }
+    }
+    @mixin media_tablet(){
+        @media (max-width:$tablet){
             @content
         }
     }
