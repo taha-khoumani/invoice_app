@@ -2,12 +2,59 @@
 
 body{
     margin:0;
+    font-family: 'League Spartan', sans-serif;
 }
+p{
+    margin:0;
+}
+
+//buttons
+    .plus_button{
+        display: flex;
+        align-items: center;
+        gap:15px;
+        padding:8px  17px 8px 8px !important;
+        @include media_mobile(){gap:8px;}
+    }
+    .all_button{
+        border-radius: 24px;
+        border: none;
+        font-weight: 700;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background-color 125ms;
+    }
+    .purple_button{
+        @extend .all_button;
+        padding:15px 22px;
+        background-color: $purpleFA;
+        color: white;
+        &:hover{
+            background-color: $purpleFF;
+        }
+    }
+    .plus{
+        border-radius: 100%;
+        min-height: 32px;
+        min-width: 32px;
+        box-sizing: border-box;
+        background-color: white;
+        padding:10px 9px 10px 10px;
+    }
+//
 
 //dark&lightTheme
 .dark{
     color: white;
     background-color: $blackBG;
+    .filter_options{
+        background-color: $black45 !important;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25) !important;
+
+        input{
+            color: #1E2139;
+        }
+    }
 }
 .light{
     background-color: $whiteBG;

@@ -17,7 +17,6 @@ export default function Navbar() {
     
     function handleToggleTheme (e:FormEvent){
         dispatch(setTheme(theme === 'light' ? 'dark': 'light'))
-        console.log(theme)
     }
 
   return (

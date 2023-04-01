@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    theme:'light'
+    theme:'light',
+    isFilterOn:false,
+    filter:'All'
 }
 
 const uiSlice = createSlice({
@@ -11,8 +13,14 @@ const uiSlice = createSlice({
         setTheme:(state,{payload})=>{
             state.theme = payload
         },
+        toggleFilter:(state,{payload})=>{
+            state.isFilterOn = payload
+        },
+        setFilter:(state,{payload})=>{
+            state.filter = payload
+        },
     }
 })
 
 export default uiSlice.reducer
-export const {setTheme} = uiSlice.actions
+export const {setTheme,toggleFilter,setFilter} = uiSlice.actions

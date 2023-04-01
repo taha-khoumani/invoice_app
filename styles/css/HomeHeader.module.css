@@ -1,0 +1,113 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+@media (max-width: 767px) {
+  .header {
+    gap: 10px;
+  }
+}
+.header .read h1 {
+  margin-bottom: 6px !important;
+  font-weight: 700;
+  font-size: 36px;
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .header .read h1 {
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0;
+  }
+}
+.header .read p {
+  color: #888EB0;
+  font-weight: 500;
+  font-size: 13px;
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .header .read span {
+    display: none;
+  }
+}
+.header .write {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+@media (max-width: 767px) {
+  .header .write {
+    gap: 20px;
+  }
+}
+.header .write .write_filter_wrap {
+  position: relative;
+}
+.header .write .write_filter_wrap .filter {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+@media (max-width: 767px) {
+  .header .write .write_filter_wrap .filter {
+    gap: 12px;
+  }
+}
+@media (max-width: 390px) {
+  .header .write .write_filter_wrap .filter {
+    gap: 7px;
+  }
+}
+.header .write .write_filter_wrap .filter .filter_text {
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .header .write .write_filter_wrap .filter .filter_text span {
+    display: none;
+  }
+}
+.header .write .write_filter_wrap .filter i {
+  font-size: 12px;
+  padding-top: 4px;
+  color: #7C5DFA;
+}
+.header .write .write_filter_wrap .filter_options {
+  background-color: white;
+  position: absolute;
+  padding: 12px 18px;
+  border-radius: 8px;
+  box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
+  min-width: 128px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  inset: 30px 0px auto -19px;
+}
+.header .write .write_filter_wrap .filter_options div {
+  width: auto;
+}
+.header .write .write_filter_wrap .filter_options label {
+  padding-left: 10px;
+}
+.header .write .write_filter_wrap .filter_options input, .header .write .write_filter_wrap .filter_options label {
+  cursor: pointer;
+}
+.header .write .write_filter_wrap .filter_options input {
+  accent-color: #7C5DFA;
+}
+@media (max-width: 767px) {
+  .header .write .write_filter_wrap .filter_options {
+    inset: 30px 0px auto -53px;
+  }
+}
+@media (max-width: 767px) {
+  .header .write .write_new .invoice {
+    display: none;
+  }
+}

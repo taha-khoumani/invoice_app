@@ -1,9 +1,16 @@
-// @import '../../styles/scss//reusables'
+// @import '../../styles/scss/reusables'
 
 //VARIABLES:
     //media_queries
+    $minimobile:390px;
     $mobile:767px;
     $tablet:1023px;
+
+    //main_min_width
+    $maxdesktop:730px;
+    $maxtablet:672px;
+    $maxmobile:327px;
+    $maxminimobile:290px;
 
     //colors
     $purple53:#373B53;
@@ -13,8 +20,41 @@
     $whiteBG:#F9FAFE;
     $whiteFA:#DFE3FA;
     $blackBG:#141625;
-//MIXINS:
-    //media_queries
+    $black45:#252945;
+//
+
+//TYPOGRAPHY
+    //headings
+    @mixin hl(){
+        font-weight: 700;
+        font-size: 36px;
+        margin:0;
+    }
+    @mixin hm(){
+        font-weight: 700;
+        font-size: 24px;
+        margin:0;
+    }
+    @mixin hs(){
+        font-weight: 700;
+        font-size: 15px;
+        margin:0;
+    }
+
+    //paragraphs
+    @mixin p(){
+        font-weight: 500;
+        font-size: 13px;
+        margin:0;
+    }
+//
+
+//MEDIA_QUERIES:
+    @mixin media_mini_mobile(){
+        @media (max-width:$minimobile){
+            @content
+        }
+    }
     @mixin media_mobile(){
         @media (max-width:$mobile){
             @content
@@ -25,3 +65,6 @@
             @content
         }
     }
+    
+//
+

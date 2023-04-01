@@ -2,6 +2,7 @@
 
 .wraper{
     display: flex;
+    min-height: 100vh;
     @include media_tablet(){
         flex-direction: column;
     }

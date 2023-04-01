@@ -1,5 +1,6 @@
 .wraper {
   display: flex;
+  min-height: 100vh;
 }
 @media (max-width: 1023px) {
   .wraper {

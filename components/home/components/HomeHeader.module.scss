@@ -1,0 +1,97 @@
+@import "../../../styles/scss/reusables";
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    gap:50px;
+    @include media_mobile(){
+        gap:10px;
+    }
+
+    .read{
+        h1{
+            margin-bottom: 6px !important;
+            @include hl();
+            @include media_mobile(){
+                @include hm();
+            }
+        }
+        p{
+            color:#888EB0;
+            @include p()
+        }
+        span{
+            @include media_mobile(){display: none;}
+        }
+    }
+
+    .write{
+        display: flex;
+        align-items: center;
+        gap:40px;
+        @include media_mobile(){
+            gap:20px;
+        }
+
+        .write_filter_wrap{
+            position: relative;
+            .filter{
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap:14px;
+                @include media_mobile(){gap:12px;}
+                @include media_mini_mobile(){gap:7px;}
+
+                .filter_text{
+                    @include hs();
+                    span{
+                        @include media_mobile(){display: none;}
+                    }
+                }
+
+                i{
+                    font-size: 12px;
+                    padding-top: 4px;
+                    color:$purpleFA;
+                }
+            }
+
+            .filter_options{
+                // margin-top:15px;
+                background-color: white;
+                position: absolute;
+                padding:12px 18px;
+                border-radius: 8px;
+                box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
+                min-width: 128px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+                div{width: auto;}
+                label{
+                    padding-left: 10px;
+                }
+                input,label{
+                    cursor: pointer;
+                }
+                input{
+                    accent-color: $purpleFA;
+                }
+                inset:30px 0px auto -19px ;
+                @include media_mobile{
+                    inset:30px 0px auto -53px;
+                }
+            }
+        }
+
+        .write_new{
+            .invoice{
+                @include media_mobile(){
+                    display: none;
+                }
+            }
+        }
+    }
+}
