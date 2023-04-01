@@ -1,19 +1,24 @@
 import React, { ReactNode } from 'react'
-
-//components
 import Navbar from './Navbar'
-
-//styles
 import styles from '@/styles/css/Wraper.module.css'
+import { useSelector } from 'react-redux'
 
 type props = {
-    children:ReactNode
+  children:ReactNode
+}
+
+interface RootState {
+  ui: {
+    theme:string
+  }
 }
 
 export default function Wraper(props:props) {
-    const {children} = props
+  const {children} = props
+  const {theme} = useSelector((store:RootState)=>store.ui)
+
   return (
-    <div className={styles.wraper} >
+    <div className={`${styles.wraper} ${theme}`} >
         <Navbar/>
         {children}
     </div>
