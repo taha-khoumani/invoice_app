@@ -9,7 +9,9 @@
     height: 100px;
     border-radius: 0 20px 20px 0;
     height: 100vh;
+    position: fixed;
     @include media_tablet(){
+        position: static;
         align-items: stretch;
         height: auto;
         border-radius: 0;

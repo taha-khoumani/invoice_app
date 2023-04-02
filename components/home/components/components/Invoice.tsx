@@ -30,10 +30,20 @@ export default function Invoice(props:props) {
                 {id}
             </p> 
             <p className={`${styles.due} due`} >Due {paymentDue}</p>
-            <p className={`${styles.name} name`} >{clientName}</p>
+
+            {/* if desktop --> css */}
+            <p className={`${styles.name_desktop} name`} >{clientName}</p>
+
+            {/* if mobile --> css */}
+            <p className={styles.total_mobile} >{total} $</p>
         </div>
         <div className={styles.invoice_II} >
-            <p className={styles.total} >{total} $</p>
+            {/* if mobile --> css */}
+            <p className={`${styles.name_mobile} name`} >{clientName}</p>
+
+            {/* if desktop --> css */}
+            <p className={styles.total_desktop} >{total} $</p>
+
             <button className={status} >
                 <i className="fa-solid fa-circle"></i>
                 {firstToCapital(status)}

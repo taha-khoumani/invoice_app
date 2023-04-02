@@ -84,7 +84,7 @@ p {
 }
 .light .invoice .draft {
   color: #373B53;
-  background-color: rgba(55, 59, 83, 0.1);
+  background-color: rgba(55, 59, 83, 0.2);
 }
 .light .invoice .draft i {
   color: #373B53;
@@ -106,10 +106,15 @@ p {
 .paid i, .pending i, .draft i {
   font-size: 7px;
 }
+@media (max-width: 767px) {
+  .paid, .pending, .draft {
+    margin: 0;
+  }
+}
 
 .paid {
   color: #33D69F;
-  background-color: rgba(51, 214, 159, 0.1);
+  background-color: rgba(51, 214, 159, 0.2);
 }
 .paid i {
   color: #33D69F;
@@ -117,7 +122,7 @@ p {
 
 .pending {
   color: #FF8F00;
-  background-color: rgba(255, 143, 0, 0.1);
+  background-color: rgba(255, 143, 0, 0.2);
 }
 .pending i {
   color: #FF8F00;

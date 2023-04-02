@@ -5,4 +5,11 @@
     flex-direction: column;
     gap:16px;
     padding-block: 64px;
+    @include media_tablet(){
+        padding-block: 35px 64px;
+    }
+    @include media_mobile(){
+        padding-block: 28px 64px;
+        align-items: center;
+    }
 }

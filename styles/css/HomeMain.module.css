@@ -4,3 +4,14 @@
   gap: 16px;
   padding-block: 64px;
 }
+@media (max-width: 1023px) {
+  .main {
+    padding-block: 35px 64px;
+  }
+}
+@media (max-width: 767px) {
+  .main {
+    padding-block: 28px 64px;
+    align-items: center;
+  }
+}

@@ -86,7 +86,7 @@ p{
         //status
         .draft{
             color:$s_black;
-            background-color: rgba($color: $s_black, $alpha: 0.1);
+            background-color: rgba($color: $s_black, $alpha: 0.2);
             i{color:$s_black;}
         }
     }
@@ -108,15 +108,18 @@ p{
     i{
         font-size: 7px;
     }
+    @include media_mobile{
+        margin:0;
+    }
 }
 .paid{
     color:$s_green;
-    background-color: rgba($color: $s_green, $alpha: 0.1);
+    background-color: rgba($color: $s_green, $alpha: 0.2);
     i{color:$s_green;}
 }
 .pending{
     color:$s_orange;
-    background-color: rgba($color: $s_orange, $alpha: 0.1);
+    background-color: rgba($color: $s_orange, $alpha: 0.2);
     i{color:$s_orange;}
 }
 //draft is considered in dark/light mode
