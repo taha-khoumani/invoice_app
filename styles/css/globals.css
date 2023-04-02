@@ -51,13 +51,74 @@ p {
   background-color: #141625;
 }
 .dark .filter_options {
-  background-color: #252945 !important;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25) !important;
+  background-color: #252945;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
 }
-.dark .filter_options input {
-  color: #1E2139;
+.dark .invoice {
+  background-color: #1E2139;
+}
+.dark .invoice .due, .dark .invoice .name {
+  color: white;
+}
+.dark .invoice .draft {
+  color: #DFE3FA;
+  background-color: rgba(223, 227, 250, 0.1);
+}
+.dark .invoice .draft i {
+  color: #DFE3FA;
 }
 
 .light {
+  color: black;
   background-color: #F9FAFE;
+}
+.light .filter_options {
+  background-color: white;
+  box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
+}
+.light .invoice {
+  background-color: white;
+}
+.light .invoice .due, .light .invoice .name {
+  color: #7E88C3;
+}
+.light .invoice .draft {
+  color: #373B53;
+  background-color: rgba(55, 59, 83, 0.1);
+}
+.light .invoice .draft i {
+  color: #373B53;
+}
+
+.paid, .pending, .draft {
+  border-radius: 6px;
+  width: 104px;
+  height: 40px;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-right: 20px;
+}
+.paid i, .pending i, .draft i {
+  font-size: 7px;
+}
+
+.paid {
+  color: #33D69F;
+  background-color: rgba(51, 214, 159, 0.1);
+}
+.paid i {
+  color: #33D69F;
+}
+
+.pending {
+  color: #FF8F00;
+  background-color: rgba(255, 143, 0, 0.1);
+}
+.pending i {
+  color: #FF8F00;
 }

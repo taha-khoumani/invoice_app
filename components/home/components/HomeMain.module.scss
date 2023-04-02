@@ -1,1 +1,8 @@
-@import '../../../styles/scss//reusables'
+@import '../../../styles/scss//reusables';
+
+.main{
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+    padding-block: 64px;
+}

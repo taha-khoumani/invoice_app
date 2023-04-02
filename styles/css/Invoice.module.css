@@ -1,0 +1,36 @@
+.invoice {
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 32px;
+  align-items: center;
+}
+
+.invoice_I, .invoice_II {
+  display: flex;
+  align-items: center;
+}
+
+.invoice_I {
+  gap: 40px;
+}
+.invoice_I .id {
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0;
+}
+.invoice_I .id span {
+  color: #7E88C3;
+}
+.invoice_I .due, .invoice_I .name {
+  font-weight: 500;
+  font-size: 13px;
+  margin: 0;
+}
+
+.invoice_II .total {
+  margin-right: 40px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+}

@@ -45,17 +45,78 @@ p{
 
 //dark&lightTheme
 .dark{
-    color: white;
+    color: white ;
     background-color: $blackBG;
     .filter_options{
-        background-color: $black45 !important;
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25) !important;
+        background-color: $black45;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25) ;
+    }
+    .invoice{
+        background-color: #1E2139 ;
 
-        input{
-            color: #1E2139;
+        //due-date&client-name
+        .due,.name{
+            color: white ;
+        }
+
+        //status
+        .draft{
+            color:$s_white ;
+            background-color: rgba($color: $s_white, $alpha: 0.1);
+            i{color:$s_white;}
         }
     }
 }
 .light{
+    color: black;
     background-color: $whiteBG;
+    .filter_options{
+        background-color: white;
+        box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
+    }
+
+    .invoice{
+        background-color: white;
+
+        //due-date&client-name
+        .due,.name{
+            color: #7E88C3;
+        }
+
+        //status
+        .draft{
+            color:$s_black;
+            background-color: rgba($color: $s_black, $alpha: 0.1);
+            i{color:$s_black;}
+        }
+    }
 }
+
+//status-button-styles
+.paid,.pending,.draft{
+    border-radius: 6px;
+    width: 104px;
+    height: 40px;
+    border:none;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:8px;
+    margin-right: 20px;
+    i{
+        font-size: 7px;
+    }
+}
+.paid{
+    color:$s_green;
+    background-color: rgba($color: $s_green, $alpha: 0.1);
+    i{color:$s_green;}
+}
+.pending{
+    color:$s_orange;
+    background-color: rgba($color: $s_orange, $alpha: 0.1);
+    i{color:$s_orange;}
+}
+//draft is considered in dark/light mode

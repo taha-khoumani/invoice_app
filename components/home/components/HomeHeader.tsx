@@ -10,12 +10,16 @@ interface RootStore {
   ui:{
     isFilterOn:boolean
     filter:string
+  },
+  invoices:{
+    invoices:object[]
   }
 }
 
 export default function HomeHeader() {
   const dispatch = useDispatch() 
   const {isFilterOn,filter} = useSelector((store:RootStore)=>store.ui)
+  const {invoices} = useSelector((store:RootStore)=>store.invoices)
 
   function onToggleFilterHandler(e:FormEvent){
     dispatch(toggleFilter(!isFilterOn))
@@ -49,7 +53,7 @@ export default function HomeHeader() {
             <h1>Invoices</h1>
             <p>
               <span>There are&nbsp;</span>
-              {7} 
+              {invoices.length} 
               <span>&nbsp;total</span> 
               &nbsp;invoices
             </p>

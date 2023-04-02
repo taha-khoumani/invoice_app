@@ -1,0 +1,38 @@
+@import '../../../../styles/scss/reusables.scss';
+
+//parent
+.invoice{
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    padding:16px 32px;
+    align-items: center;
+}
+
+//childs
+.invoice_I,.invoice_II{
+    display: flex;
+    align-items: center;
+}
+
+.invoice_I{
+    gap:40px;
+    .id{
+        @include hs();
+        span{
+            color:$purpleC3;
+        }
+    }
+    .due,.name{
+        @include p();
+    }
+}
+
+.invoice_II{
+    .total{
+        margin-right: 40px;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
