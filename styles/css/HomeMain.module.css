@@ -12,6 +12,13 @@
 @media (max-width: 767px) {
   .main {
     padding-block: 28px 64px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+}
+@media (max-width: 610px) {
+  .main {
+    display: flex;
     align-items: center;
   }
 }

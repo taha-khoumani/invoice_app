@@ -8,13 +8,24 @@
     padding:16px 32px;
     align-items: center;
     box-sizing: border-box;
+    cursor: pointer;
+    &:hover{
+        outline: 1px solid $purpleFA;
+    }
     @include media_mobile(){
         padding:25px 22px 24px;
-        width: 327px;
         align-items: normal;
     }
+    @include media(610px){
+        width: 75%;
+        min-width: 327px;
+    }
+    // @include media(500px){
+
+    // }
     @include media(390px){
         width: 100%;
+        min-width: 0px;
     }
 }
 

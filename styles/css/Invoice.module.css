@@ -5,17 +5,27 @@
   padding: 16px 32px;
   align-items: center;
   box-sizing: border-box;
+  cursor: pointer;
+}
+.invoice:hover {
+  outline: 1px solid #7C5DFA;
 }
 @media (max-width: 767px) {
   .invoice {
     padding: 25px 22px 24px;
-    width: 327px;
     align-items: normal;
+  }
+}
+@media (max-width: 610px) {
+  .invoice {
+    width: 75%;
+    min-width: 327px;
   }
 }
 @media (max-width: 390px) {
   .invoice {
     width: 100%;
+    min-width: 0px;
   }
 }
 

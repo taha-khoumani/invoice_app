@@ -1,18 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    invoices:[]
+    allInvoices:[],
+    filteredOptimizedInvoices:[]
 }
 
 const invoicesSlice = createSlice({
     name:"invoices",
     initialState,
     reducers:{
-        setInvoices:(state,{payload})=>{
-            state.invoices = payload
+        setAllInvoices:(state,{payload})=>{
+            state.allInvoices = payload
+        },
+        setFilteredOptimizedInvoices:(state,{payload})=>{
+            state.filteredOptimizedInvoices = payload
         },
     }
 })
 
 export default invoicesSlice.reducer
-export const {setInvoices} = invoicesSlice.actions
+export const {setAllInvoices,setFilteredOptimizedInvoices} = invoicesSlice.actions

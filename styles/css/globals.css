@@ -102,6 +102,7 @@ p {
   justify-content: center;
   gap: 8px;
   margin-right: 20px;
+  cursor: pointer;
 }
 .paid i, .pending i, .draft i {
   font-size: 7px;
