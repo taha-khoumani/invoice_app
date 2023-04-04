@@ -33,6 +33,19 @@ p{
             background-color: $purpleFF;
         }
     }
+    .normal_button{
+        @extend .all_button;
+        padding:15px 22px;
+    }
+    .delete_button{
+        @extend .all_button;
+        padding:15px 22px;
+        background-color: $red;
+        color: white;
+        &:hover{
+            background-color: #FF9797;
+        }
+    }
     .plus{
         border-radius: 100%;
         min-height: 32px;
@@ -51,7 +64,7 @@ p{
         background-color: $black45;
         box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25) ;
     }
-    .invoice{
+    .invoice,.on_mobile_write{
         background-color: #1E2139 ;
 
         //due-date&client-name
@@ -66,6 +79,24 @@ p{
             i{color:$s_white;}
         }
     }
+    .normal_button{
+        color: #DFE3FA;
+        background-color: #252945;
+        &:hover{
+            background-color: white;
+            color:$purpleC3;
+        }
+    }
+    .status_name{
+        color: #DFE3FA;
+    }
+    .go_back{
+        color: white;
+        transition: color 150ms;
+        &:hover{
+            color:#888EB0;
+        }
+    }
 }
 .light{
     color: black;
@@ -74,8 +105,7 @@ p{
         background-color: white;
         box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
     }
-
-    .invoice{
+    .invoice,.on_mobile_write{
         background-color: white;
 
         //due-date&client-name
@@ -88,6 +118,23 @@ p{
             color:$s_black;
             background-color: rgba($color: $s_black, $alpha: 0.2);
             i{color:$s_black;}
+        }
+    }
+    .normal_button{
+        color:$purpleC3;
+        background-color: #F9FAFE;
+        &:hover{
+            background-color: #DFE3FA;
+        }
+    }
+    .status_name{
+        color:#858BB2;
+    }
+    .go_back{
+        color:black;
+        transition: color 150ms;
+        &:hover{
+            color: #7E88C3;
         }
     }
 }
@@ -105,7 +152,6 @@ p{
     justify-content: center;
     gap:8px;
     margin-right: 20px;
-    cursor: pointer;
     i{
         font-size: 7px;
     }

@@ -1,4 +1,4 @@
-// @import '../../styles/scss/reusables'
+// @import '../../styles/scss/reusables';
 
 //VARIABLES:
     //media_queries
@@ -21,12 +21,16 @@
     $whiteFA:#DFE3FA;
     $blackBG:#141625;
     $black45:#252945;
+    $red:#EC5757;
 
     //status-colors
     $s_green:#33D69F;
     $s_orange:#FF8F00;
     $s_black:#373B53;
     $s_white:#DFE3FA;
+
+    //invoice_detail_breaking_point
+    $phone:610px;
 //
 
 //TYPOGRAPHY

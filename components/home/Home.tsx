@@ -9,7 +9,7 @@ import { setAllInvoices } from '@/redux/slices/invoicesSlice'
 export default function Home() {
     const dispatch = useDispatch()
     useEffect(()=>{
-        dispatch(setAllInvoices(data))
+      dispatch(setAllInvoices(data))
     },[])
 
   return (

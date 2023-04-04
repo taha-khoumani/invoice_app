@@ -19,7 +19,7 @@ p {
   }
 }
 
-.all_button, .purple_button {
+.all_button, .delete_button, .normal_button, .purple_button {
   border-radius: 24px;
   border: none;
   font-weight: 700;
@@ -35,6 +35,19 @@ p {
 }
 .purple_button:hover {
   background-color: #9277FF;
+}
+
+.normal_button {
+  padding: 15px 22px;
+}
+
+.delete_button {
+  padding: 15px 22px;
+  background-color: #EC5757;
+  color: white;
+}
+.delete_button:hover {
+  background-color: #FF9797;
 }
 
 .plus {
@@ -54,18 +67,36 @@ p {
   background-color: #252945;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
 }
-.dark .invoice {
+.dark .invoice, .dark .on_mobile_write {
   background-color: #1E2139;
 }
-.dark .invoice .due, .dark .invoice .name {
+.dark .invoice .due, .dark .invoice .name, .dark .on_mobile_write .due, .dark .on_mobile_write .name {
   color: white;
 }
-.dark .invoice .draft {
+.dark .invoice .draft, .dark .on_mobile_write .draft {
   color: #DFE3FA;
   background-color: rgba(223, 227, 250, 0.1);
 }
-.dark .invoice .draft i {
+.dark .invoice .draft i, .dark .on_mobile_write .draft i {
   color: #DFE3FA;
+}
+.dark .normal_button {
+  color: #DFE3FA;
+  background-color: #252945;
+}
+.dark .normal_button:hover {
+  background-color: white;
+  color: #7E88C3;
+}
+.dark .status_name {
+  color: #DFE3FA;
+}
+.dark .go_back {
+  color: white;
+  transition: color 150ms;
+}
+.dark .go_back:hover {
+  color: #888EB0;
 }
 
 .light {
@@ -76,18 +107,35 @@ p {
   background-color: white;
   box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
 }
-.light .invoice {
+.light .invoice, .light .on_mobile_write {
   background-color: white;
 }
-.light .invoice .due, .light .invoice .name {
+.light .invoice .due, .light .invoice .name, .light .on_mobile_write .due, .light .on_mobile_write .name {
   color: #7E88C3;
 }
-.light .invoice .draft {
+.light .invoice .draft, .light .on_mobile_write .draft {
   color: #373B53;
   background-color: rgba(55, 59, 83, 0.2);
 }
-.light .invoice .draft i {
+.light .invoice .draft i, .light .on_mobile_write .draft i {
   color: #373B53;
+}
+.light .normal_button {
+  color: #7E88C3;
+  background-color: #F9FAFE;
+}
+.light .normal_button:hover {
+  background-color: #DFE3FA;
+}
+.light .status_name {
+  color: #858BB2;
+}
+.light .go_back {
+  color: black;
+  transition: color 150ms;
+}
+.light .go_back:hover {
+  color: #7E88C3;
 }
 
 .paid, .pending, .draft {
@@ -102,7 +150,6 @@ p {
   justify-content: center;
   gap: 8px;
   margin-right: 20px;
-  cursor: pointer;
 }
 .paid i, .pending i, .draft i {
   font-size: 7px;

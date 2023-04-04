@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import Invoice from './components/Invoice'
 import { useDispatch } from 'react-redux'
 import { setFilteredOptimizedInvoices } from '@/redux/slices/invoicesSlice'
+import NoInvoices from './components/NoInvoices'
 
 interface RootStore {
   ui:{
@@ -52,14 +53,16 @@ export default function HomeMain() {
     //send export data
     dispatch(setFilteredOptimizedInvoices(filteredData))
 
-  },[filter])
+  },[filter,allInvoices])
+
+  
 
   //desired-data
-  const invoicesEls = filteredOptimizedInvoices.map(invoice=><Invoice key={invoice.id} invoiceData={invoice} />)
-
-  return (
+  return ( 
+    filteredOptimizedInvoices.length === 0 ?
+    <NoInvoices /> :
     <div className={styles.main} >
-      {invoicesEls}
+      {filteredOptimizedInvoices.map(invoice=><Invoice key={invoice.id} invoiceData={invoice} />)}
     </div>
   )
 }

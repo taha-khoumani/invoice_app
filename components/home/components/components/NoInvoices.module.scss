@@ -1,0 +1,19 @@
+@import '../../../../styles/scss/reusables';
+
+.no_invoices{
+    margin: 90px auto;
+    img{
+        margin:0 auto;
+        display: block;
+    }
+    p,h1{
+        text-align: center;
+    }
+    h1{
+        font-size: 24px;
+    }
+    p{
+        @include p();
+        color:#888EB0;
+    }
+}

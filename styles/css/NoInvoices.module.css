@@ -1,0 +1,19 @@
+.no_invoices {
+  margin: 90px auto;
+}
+.no_invoices img {
+  margin: 0 auto;
+  display: block;
+}
+.no_invoices p, .no_invoices h1 {
+  text-align: center;
+}
+.no_invoices h1 {
+  font-size: 24px;
+}
+.no_invoices p {
+  font-weight: 500;
+  font-size: 13px;
+  margin: 0;
+  color: #888EB0;
+}

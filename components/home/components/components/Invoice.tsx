@@ -2,6 +2,7 @@ import React from 'react'
 import styles from '@/styles/css/Invoice.module.css'
 import rightArrow from '@/public/icon-arrow-right.svg'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 interface invoice {
     id:string,
@@ -22,8 +23,17 @@ export default function Invoice(props:props) {
         return status[0].toUpperCase()+status.slice(1)
     }
 
+    const router = useRouter()
+
+    function onClickHandler(){
+        router.push(`/${id}`)
+    }
+
   return (
-    <div className={`${styles.invoice} invoice`} >
+    <div 
+        className={`${styles.invoice} invoice`} 
+        onClick={onClickHandler}
+    >
         <div className={styles.invoice_I} >
             <p className={styles.id} >
                 <span>#</span>
