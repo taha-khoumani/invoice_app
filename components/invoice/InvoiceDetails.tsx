@@ -37,7 +37,17 @@ interface props {
 export default function InvoiceDetails(props:props) {
   const {
     id,
-    status
+    description,
+    status,
+    createdAt,
+    paymentDue,
+    paymentTerms,
+    clientName,
+    clientEmail,
+    senderAddress,
+    clientAddress,
+    items,
+    total,
   } = props.desiredInvoice
 
   function firstToCapital(status:string):string{
@@ -56,10 +66,14 @@ export default function InvoiceDetails(props:props) {
     <>
       <div className={styles.invoice_details} >
         <div>
+
+          {/* Go Back */}
           <Link className={`${styles.go_back} go_back`} href={'/'}>
             <i className="fa-solid fa-angle-left"></i>
             Go Back
           </Link>
+
+          {/* top section */}
           <div 
             className={`${styles.invoice} invoice`} 
           >
@@ -71,6 +85,67 @@ export default function InvoiceDetails(props:props) {
               </button>
             </div>
             {writeButtons}
+          </div>
+
+          {/* main section */}
+          <div className={`${styles.main} main`} >
+            {/* first section */}
+            <div className={styles.main_top}  >
+              <div>
+                <p>
+                  <span>#</span>
+                  {id}
+                </p>
+                <p>{description}</p>
+              </div>
+              <div>
+                <p>{senderAddress.street}</p>
+                <p>{senderAddress.city}</p>
+                <p>{senderAddress.postCode}</p>
+                <p>{senderAddress.country}</p>
+              </div>
+            </div>
+
+            {/* middle section */}
+            <div className={styles.main_mid}  >
+
+              {/* middle left section */}
+              <div className={styles.main_mid_left}   >
+                <div className={styles.dates} >
+                  <div>
+                    <p>Invoice Date</p>
+                    <p>{createdAt}</p>
+                  </div>
+                  <div>
+                    <p>Payment Due</p>
+                    <p>{paymentDue}</p>
+                  </div>
+                </div>
+                <div className={styles.to_infos} >
+                  <p>Bill To</p>
+
+                  <p>{clientName}</p>
+
+                  <p>{clientAddress.street}</p>
+                  <p>{clientAddress.city}</p>
+                  <p>{clientAddress.postCode}</p>
+                  <p>{clientAddress.country}</p>
+                </div>
+              </div>
+
+              {/* middle right section */}
+              <div className={styles.main_mid_right}   >
+                <div>
+                  <p>Sent to</p>
+                  <p>{clientEmail}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* last section */}
+            <div className={styles.main_bottom}  >
+              {'money stuff'}
+            </div>
           </div>
         </div>
       </div>

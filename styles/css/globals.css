@@ -67,17 +67,17 @@ p {
   background-color: #252945;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
 }
-.dark .invoice, .dark .on_mobile_write {
+.dark .invoice, .dark .on_mobile_write, .dark .main {
   background-color: #1E2139;
 }
-.dark .invoice .due, .dark .invoice .name, .dark .on_mobile_write .due, .dark .on_mobile_write .name {
+.dark .invoice .due, .dark .invoice .name, .dark .on_mobile_write .due, .dark .on_mobile_write .name, .dark .main .due, .dark .main .name {
   color: white;
 }
-.dark .invoice .draft, .dark .on_mobile_write .draft {
+.dark .invoice .draft, .dark .on_mobile_write .draft, .dark .main .draft {
   color: #DFE3FA;
   background-color: rgba(223, 227, 250, 0.1);
 }
-.dark .invoice .draft i, .dark .on_mobile_write .draft i {
+.dark .invoice .draft i, .dark .on_mobile_write .draft i, .dark .main .draft i {
   color: #DFE3FA;
 }
 .dark .normal_button {
@@ -107,17 +107,17 @@ p {
   background-color: white;
   box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
 }
-.light .invoice, .light .on_mobile_write {
+.light .invoice, .light .on_mobile_write, .light .main {
   background-color: white;
 }
-.light .invoice .due, .light .invoice .name, .light .on_mobile_write .due, .light .on_mobile_write .name {
+.light .invoice .due, .light .invoice .name, .light .on_mobile_write .due, .light .on_mobile_write .name, .light .main .due, .light .main .name {
   color: #7E88C3;
 }
-.light .invoice .draft, .light .on_mobile_write .draft {
+.light .invoice .draft, .light .on_mobile_write .draft, .light .main .draft {
   color: #373B53;
   background-color: rgba(55, 59, 83, 0.2);
 }
-.light .invoice .draft i, .light .on_mobile_write .draft i {
+.light .invoice .draft i, .light .on_mobile_write .draft i, .light .main .draft i {
   color: #373B53;
 }
 .light .normal_button {
