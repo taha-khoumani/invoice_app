@@ -1,0 +1,21 @@
+@import '../../../../styles/scss/reusables';
+
+
+.input_wrapper{
+    display: flex;
+    flex-direction: column;
+    gap:9px;
+    label{
+        @include p();
+    }
+    input{
+        border-radius: 4px;
+        padding:15px 20px;
+        @include hs();
+        outline:none;
+        letter-spacing: -0.25;
+        &:focus{
+            border-color: #9277FF;
+        }
+    }
+}

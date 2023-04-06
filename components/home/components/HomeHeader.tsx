@@ -4,7 +4,8 @@ import plus from '../../../public/icon-plus.svg'
 import styles from '@/styles/css/HomeHeader.module.css'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { toggleFilter ,setFilter} from '@/redux/slices/uiSlice'
+import { toggleFilter ,setFilter, toggleNewInvoice} from '@/redux/slices/uiSlice'
+import { setModaleStyles } from '@/lib/functions'
 
 interface RootStore {
   ui:{
@@ -47,6 +48,11 @@ export default function HomeHeader() {
     document.body.addEventListener('click',onBodyClickHandler,)
     return ()=> document.body.removeEventListener('click',onBodyClickHandler)
   },[])
+
+  function onNewInvoiceHandler(){
+    setModaleStyles(true)
+    dispatch(toggleNewInvoice(true))
+  }
 
   return (
     <div className={styles.header} >
@@ -117,7 +123,10 @@ export default function HomeHeader() {
                   </div>
               }
           </div>
-          <button className={`${styles.write_new} purple_button plus_button`}>
+          <button 
+            className={`${styles.write_new} purple_button plus_button`}
+            onClick={onNewInvoiceHandler}
+          >
             <Image src={plus} alt='plus' className='plus' />
             <span>
               New 

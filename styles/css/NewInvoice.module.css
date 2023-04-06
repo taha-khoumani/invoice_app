@@ -1,0 +1,213 @@
+.write_invoice_first_wrapper {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  z-index: 25;
+}
+
+.write_invoice_second_wrapper {
+  position: relative;
+  max-height: 100vh;
+  background-color: white;
+  padding-left: 103px;
+  border-radius: 0 20px 20px 0;
+}
+@media (max-width: 1023px) {
+  .write_invoice_second_wrapper {
+    margin-top: 80px;
+    padding-left: 0;
+  }
+}
+@media (max-width: 767px) {
+  .write_invoice_second_wrapper {
+    border-radius: 0;
+    width: 100%;
+  }
+}
+
+.write_invoice_second_half {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  max-height: 100vh;
+}
+
+.buttons {
+  box-shadow: 0px -2px 80px 0px rgba(0, 0, 0, 0.2);
+  padding: 20px 56px 32px;
+  display: flex;
+  gap: 8px;
+}
+@media (max-width: 500px) {
+  .buttons button {
+    padding: 15px;
+    font-size: 13px;
+  }
+}
+.buttons .reverse_normal_button {
+  margin-right: auto;
+}
+@media (max-width: 500px) {
+  .buttons .reverse_normal_button {
+    margin-right: 0;
+  }
+}
+@media (max-width: 500px) {
+  .buttons {
+    gap: 0;
+    justify-content: space-evenly;
+    padding: 21px 5px 22px;
+  }
+}
+
+.write_invoice_third_wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  gap: 40px;
+  padding: 55px 56px 32px;
+  width: 616px;
+  box-sizing: border-box;
+  flex: 100%;
+  max-height: calc(100vh - 99px);
+}
+@media (max-width: 1023px) {
+  .write_invoice_third_wrapper {
+    max-height: calc(100vh - 179px);
+  }
+}
+@media (max-width: 767px) {
+  .write_invoice_third_wrapper {
+    max-height: calc(100vh - 170px);
+    padding: 30px 24px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 635px) {
+  .write_invoice_third_wrapper {
+    width: auto;
+  }
+}
+@media (max-width: 500px) {
+  .write_invoice_third_wrapper {
+    max-height: calc(100vh - 168px);
+  }
+}
+.write_invoice_third_wrapper input {
+  background-color: transparent;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0;
+}
+
+.from_inputs {
+  display: grid;
+  gap: 24px;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
+}
+.from_inputs .street_address {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+@media (max-width: 767px) {
+  .from_inputs .street_address {
+    grid-column-end: 3;
+  }
+}
+@media (max-width: 767px) {
+  .from_inputs .country {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}
+@media (max-width: 767px) {
+  .from_inputs {
+    gap: 15px;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.to_inputs {
+  display: grid;
+  gap: 24px;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+}
+.to_inputs .client_name, .to_inputs .client_email, .to_inputs .client_street_address {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+@media (max-width: 767px) {
+  .to_inputs .client_name, .to_inputs .client_email, .to_inputs .client_street_address {
+    grid-column-end: 3;
+  }
+}
+@media (max-width: 767px) {
+  .to_inputs .client_country {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}
+@media (max-width: 767px) {
+  .to_inputs {
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.items_wraper .items_title {
+  color: #777F98;
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0;
+  font-size: 18px;
+}
+
+.section_title {
+  color: #7C5DFA;
+  font-weight: 500;
+  font-size: 13px;
+  margin: 0;
+  margin-bottom: 24px;
+}
+
+.input_label {
+  font-weight: 500;
+  font-size: 13px;
+  margin: 0;
+  color: #DFE3FA;
+}
+
+.reverse_normal_button {
+  border-radius: 24px;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 15px 22px;
+  color: #7E88C3;
+  background-color: #F9FAFE;
+  transition: background-color 125ms;
+}
+.reverse_normal_button:hover {
+  background-color: #DFE3FA;
+}
+
+.save {
+  border-radius: 24px;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 15px 22px;
+  color: #7E88C3;
+  background-color: #F9FAFE;
+  color: #DFE3FA;
+  background-color: #252945;
+}

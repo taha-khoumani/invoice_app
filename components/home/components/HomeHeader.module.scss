@@ -34,7 +34,9 @@
         }
 
         .write_filter_wrap{
-            position: relative;
+            position:relative;
+            z-index: 1;
+            
             .filter{
                 cursor: pointer;
                 display: flex;

@@ -2,18 +2,19 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 77px;
-  margin-left: 103px;
+  position: relative;
+  padding-top: 77px;
+  padding-left: 103px;
 }
 @media (max-width: 1023px) {
   .home {
-    margin-left: 0;
-    margin-top: 55px;
+    padding-left: 0;
+    padding-top: 55px;
   }
 }
 @media (max-width: 767px) {
   .home {
-    margin-top: 40px;
+    padding-top: 40px;
   }
 }
 .home .home_components_wraper {

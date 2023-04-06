@@ -10,6 +10,7 @@
     border-radius: 0 20px 20px 0;
     height: 100vh;
     position: fixed;
+    z-index:50;
     @include media_tablet(){
         position: static;
         align-items: stretch;

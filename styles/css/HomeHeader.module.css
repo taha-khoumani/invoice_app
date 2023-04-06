@@ -44,6 +44,7 @@
 }
 .header .write .write_filter_wrap {
   position: relative;
+  z-index: 1;
 }
 .header .write .write_filter_wrap .filter {
   cursor: pointer;

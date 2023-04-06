@@ -90,7 +90,7 @@ export default function InvoiceDetails(props:props) {
           {/* main section */}
           <div className={`${styles.main} main`} >
             {/* first section */}
-            <div className={styles.main_top}  >
+            <div className={`${styles.main_top}`}  >
               <div>
                 <p className={`${styles.id} ${"bolds"}`} >
                   <span>#</span>

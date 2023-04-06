@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     theme:'light',
     isFilterOn:false,
-    filter:'All'
+    filter:'All',
+    isNewInvoiceOpen:false,
 }
 
 const uiSlice = createSlice({
@@ -19,8 +20,11 @@ const uiSlice = createSlice({
         setFilter:(state,{payload})=>{
             state.filter = payload
         },
+        toggleNewInvoice:(state,{payload})=>{
+            state.isNewInvoiceOpen = payload
+        },
     }
 })
 
 export default uiSlice.reducer
-export const {setTheme,toggleFilter,setFilter} = uiSlice.actions
+export const {setTheme,toggleFilter,setFilter,toggleNewInvoice} = uiSlice.actions

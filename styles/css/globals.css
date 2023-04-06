@@ -1,6 +1,11 @@
+html {
+  width: 100%;
+}
+
 body {
   margin: 0;
   font-family: "League Spartan", sans-serif;
+  inset: 0;
 }
 
 p {
@@ -67,6 +72,12 @@ p {
   background-color: #252945;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
 }
+.dark .write {
+  background-color: #141625;
+}
+.dark .input_label {
+  color: #DFE3FA;
+}
 .dark .invoice, .dark .on_mobile_write, .dark .main {
   background-color: #1E2139;
 }
@@ -107,6 +118,11 @@ p {
 .dark .bolds {
   color: white !important;
 }
+.dark .input_input {
+  border: 1px solid #252945;
+  background-color: #1E2139;
+  color: white;
+}
 
 .light {
   color: black;
@@ -115,6 +131,15 @@ p {
 .light .filter_options {
   background-color: white;
   box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
+}
+.light .input_label {
+  color: #7E88C3;
+}
+.light .input_input {
+  border: 1px solid #DFE3FA;
+}
+.light .write {
+  background-color: white;
 }
 .light .invoice, .light .on_mobile_write, .light .main {
   background-color: white;
