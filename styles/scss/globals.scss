@@ -97,6 +97,15 @@ p{
             color:#888EB0;
         }
     }
+    .total_details{
+        background-color: #252945;
+    }
+    .total_div{
+        background-color: #0C0E16;
+    }
+    .bolds{
+        color: white !important;
+    }
 }
 .light{
     color: black;
@@ -137,8 +146,23 @@ p{
             color: #7E88C3;
         }
     }
+    .total_details{
+        background-color: #F9FAFE;
+    }
+    .total_div{
+        background-color: #373B53;
+    }
+    .bolds{
+        color:black !important;
+    }
+
+
+
 }
 
+.bolds{
+    font-weight: bold !important;
+}
 //status-button-styles
 .paid,.pending,.draft{
     border-radius: 6px;

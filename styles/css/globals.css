@@ -98,6 +98,15 @@ p {
 .dark .go_back:hover {
   color: #888EB0;
 }
+.dark .total_details {
+  background-color: #252945;
+}
+.dark .total_div {
+  background-color: #0C0E16;
+}
+.dark .bolds {
+  color: white !important;
+}
 
 .light {
   color: black;
@@ -136,6 +145,19 @@ p {
 }
 .light .go_back:hover {
   color: #7E88C3;
+}
+.light .total_details {
+  background-color: #F9FAFE;
+}
+.light .total_div {
+  background-color: #373B53;
+}
+.light .bolds {
+  color: black !important;
+}
+
+.bolds {
+  font-weight: bold !important;
 }
 
 .paid, .pending, .draft {

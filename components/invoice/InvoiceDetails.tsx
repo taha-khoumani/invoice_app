@@ -92,13 +92,13 @@ export default function InvoiceDetails(props:props) {
             {/* first section */}
             <div className={styles.main_top}  >
               <div>
-                <p>
+                <p className={`${styles.id} ${"bolds"}`} >
                   <span>#</span>
                   {id}
                 </p>
                 <p>{description}</p>
               </div>
-              <div>
+              <div className={styles.from_infos} >
                 <p>{senderAddress.street}</p>
                 <p>{senderAddress.city}</p>
                 <p>{senderAddress.postCode}</p>
@@ -114,17 +114,17 @@ export default function InvoiceDetails(props:props) {
                 <div className={styles.dates} >
                   <div>
                     <p>Invoice Date</p>
-                    <p>{createdAt}</p>
+                    <p className={"bolds"} >{createdAt}</p>
                   </div>
                   <div>
-                    <p>Payment Due</p>
-                    <p>{paymentDue}</p>
+                    <p> Payment Due</p>
+                    <p className={"bolds"} >{paymentDue}</p>
                   </div>
                 </div>
                 <div className={styles.to_infos} >
                   <p>Bill To</p>
 
-                  <p>{clientName}</p>
+                  <p className={"bolds"} >{clientName}</p>
 
                   <p>{clientAddress.street}</p>
                   <p>{clientAddress.city}</p>
@@ -137,14 +137,63 @@ export default function InvoiceDetails(props:props) {
               <div className={styles.main_mid_right}   >
                 <div>
                   <p>Sent to</p>
-                  <p>{clientEmail}</p>
+                  <p className={"bolds"} >{clientEmail}</p>
                 </div>
               </div>
             </div>
 
             {/* last section */}
             <div className={styles.main_bottom}  >
-              {'money stuff'}
+
+              {/* items */}
+              <div className={`total_details ${styles.total_details}`}>
+                <div className={styles.total_details_name}>
+                  <p>Item Name</p>
+                  {items.map((item,index)=>(
+                      <p 
+                        className={"bolds"} 
+                        key={index} 
+                      >
+                        {item.name}
+                      </p>
+                    )
+                  )}
+                </div>
+                <div className={styles.total_details_details}>
+                  <div>
+                    <p>QTY.</p>
+                    {items.map((item,index)=> <p key={index} >{item.quantity}</p>)}
+                  </div>
+                  <div>
+                    <p>Price</p>
+                    {items.map((item,index)=> <p key={index} >{item.price} $</p>)}
+                  </div>
+                  <div>
+                    <p>Total</p>
+                    {items.map((item,index)=> <p className={"bolds"} key={index} >{item.total} $</p>)}
+                  </div>
+                </div>
+              </div>
+              <div className={`total_details ${styles.total_details_mobile}`}>
+                {
+                  items.map(item=>(
+                    <div>
+                      <div>
+                        <p>{item.name}</p>
+                        <p>{`${item.quantity} x ${item.price} $`}</p>
+                      </div>
+                      <div>
+                        <p>{item.total}</p>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+              {/* total_infos */}
+              <div className={`total_div ${styles.total_div}`} >
+                <p>Amount Due</p>
+                <p>{total} $</p>
+              </div>
             </div>
           </div>
         </div>

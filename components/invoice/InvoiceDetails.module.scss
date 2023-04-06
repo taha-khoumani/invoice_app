@@ -77,6 +77,8 @@
             }
             button{
                 flex: 100%;
+
+                //MQ
                 @include media(455px){
                     flex: auto;
                     padding:15px 19px;
@@ -95,6 +97,7 @@
     margin-bottom: 50px;
     gap: 20px;
 
+
     //MQ
     @include media(400px){
         padding: 25px 20px;
@@ -103,6 +106,22 @@
     .main_top{
         display: flex;
         justify-content: space-between;
+
+        .id{
+            margin-bottom: 7px;
+            span{
+                color: #888EB0;
+            }
+        }
+
+        p{
+            @include pp()
+        }
+
+        .from_infos p{
+            margin-bottom: 5px;
+            text-align: end;
+        }
 
         //MQ
         @include media($phone_main){
@@ -115,6 +134,11 @@
         .main_mid{
             display: flex;
             justify-content: space-between;
+
+            p{
+                @include pp()
+            }
+
             @include media($phone_main){
                 flex-direction: column;
                 gap:32px;
@@ -124,14 +148,33 @@
                 flex: 1;
                 display: flex;
                 justify-content: space-between;
-                @include media($phone_main){
-                    
-                }
+                .dates{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    gap:20px;
+                    p:first-child{
+                        margin-bottom: 13px;
+                    }
+                }            
+
                 .to_infos,.dates{
                     
                     //MQ
                     @include media($phone_main){
                         flex:100%;
+                    }
+                }
+
+                .to_infos{
+                    p:first-child{
+                        margin-bottom: 13px;
+                    }
+                    p:nth-child(2){
+                        margin-bottom: 10px;
+                    }
+                    p:not(p:nth-child(2),p:first-child){
+                        margin-bottom: 5px;
                     }
                 }
             }
@@ -140,6 +183,11 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+
+                p:first-child{
+                    margin-bottom: 13px;
+                }
+
                 @include media($phone_main){
                     align-items: flex-start;
                 }
@@ -147,6 +195,64 @@
     //
 
     .main_bottom{
-        text-align: center;
+        .total_details{
+            display: flex;
+            padding: 33px;
+            border-radius: 8px 8px 0 0;
+            @include media(600px){
+                display: none;
+            }
+            
+            p{
+                @include pp()
+            }
+
+            .total_details_details{
+                flex:70%;
+            }
+
+            .total_details_name{
+                flex:30%;
+                display: flex;
+                flex-direction: column;
+                gap:$gap;
+            }
+
+            .total_details_details{
+                display: flex;
+                &>div{
+                    flex:100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap:$gap;
+                    align-items: flex-end;
+                }
+            }
+        }
+
+        .total_details_mobile{
+            display: none;
+            
+            @include media(600px){
+                display: flex;
+                flex-direction: column;
+                padding: 25px;
+                gap:24px;
+                border-radius: 8px 8px 0 0;
+                &>div{
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+
+        .total_div{
+            display: flex;
+            justify-content: space-between;
+            padding:27px 32px;
+            border-radius:  0 0 8px 8px;
+            color: white;
+
+        }
     }
 }

@@ -32,6 +32,9 @@
     //invoice_detail_breaking_point
     $phone:610px;
     $phone_main:600px;
+
+    //total_details_gap
+    $gap:32px;
 //
 
 //TYPOGRAPHY
@@ -57,6 +60,13 @@
         font-weight: 500;
         font-size: 13px;
         margin:0;
+    }
+    @mixin pp(){
+        font-weight: 500;
+        font-size: 13px;
+        margin:0;
+        // color:$purpleC3;
+        color:#DFE3FA;
     }
 //
 
