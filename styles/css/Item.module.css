@@ -1,0 +1,46 @@
+.item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.item i {
+  margin-left: auto;
+  color: #888EB0;
+  transition: color 150ms;
+  cursor: pointer;
+}
+.item i:hover {
+  color: #EC5757;
+}
+
+.name {
+  width: 40%;
+}
+
+.qty {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 11%;
+  min-width: 60px;
+  size: 5;
+}
+
+.price {
+  width: 20%;
+  /* Chrome, Safari, Edge, Opera */
+  /* Firefox */
+}
+.price input::-webkit-outer-spin-button,
+.price input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.price input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.total {
+  color: #888EB0;
+  width: 8.5%;
+  font-weight: bold;
+}

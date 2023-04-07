@@ -1,0 +1,48 @@
+@import '../../../../styles/scss/reusables';
+
+.item{
+    display: flex;
+    gap: $itemGap;
+    align-items: center;
+    i{
+        margin-left: auto;
+        color: #888EB0;
+        transition: color 150ms;
+        cursor: pointer;
+        &:hover{
+            color:#EC5757;
+        }
+    }
+}
+
+.name{
+    width: $name;
+}
+.qty{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: $qty;
+    min-width: 60px;
+    size: 5;
+}
+.price{
+    width: $price;
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+}
+
+.total{
+    color:#888EB0;
+    width: $total;
+    font-weight: bold;
+}

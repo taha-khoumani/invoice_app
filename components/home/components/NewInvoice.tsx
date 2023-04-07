@@ -1,9 +1,11 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from '@/styles/css/NewInvoice.module.css'
 import { useDispatch } from 'react-redux';
 import { toggleNewInvoice } from '@/redux/slices/uiSlice';
 import TextInput from './components/TextInput';
 import { setModaleStyles } from '@/lib/functions';
+import Item from './components/Item';
+import { TIMEOUT } from 'dns';
 
 interface props {
     isNewInvoiceOpen:boolean
@@ -28,11 +30,48 @@ export default function NewInvoice(props:props) {
     refButtons.current.style.boxShadow = null;
   }
 
+    const [ei,setEi] = useState([
+    {
+      "name": "Banner Design",
+      "quantity": 1,
+      "price": 156.00,
+      "total": 156.00
+    },
+    {
+      "name": "Email Design",
+      "quantity": 2,
+      "price": 200.00,
+      "total": 400.00
+    }
+  ])
+
 
 
   function onCancelHandler(){
     setModaleStyles(false)
     dispatch(toggleNewInvoice(false))
+  }
+
+  function onAddItemHandler(){
+    setEi((prev)=>{
+        return [
+            ...prev,
+            {
+                name:"",
+                quantity:0,
+                price:0.00,
+                total:0.00
+            }
+        ]
+    })
+    const form = refForm.current
+    setTimeout(
+        ()=>{
+            console.log('run')
+            // @ts-ignore: Object is possibly 'null'.
+            form.scroll({top:form.scrollHeight,behavior:'smooth'})
+        },0
+    )
   }
  
   return (
@@ -108,9 +147,30 @@ export default function NewInvoice(props:props) {
                     </div>
                     <div className={`${styles.items_wraper}`} >
                         <p className={`${styles.items_title}`} >Item List</p>
+                        <div className={`${styles.items_header}`} >
+                            <p className={`${styles.items_header_name}`} >Item Name</p>
+                            <p className={`${styles.items_header_qty}`} >Qty.</p>
+                            <p className={`${styles.items_header_price}`}>Price</p>
+                            <p className={`${styles.items_header_total}`} >Total</p>
+                        </div>
+                        {
+                            ei.map((item,index)=>(
+                                <Item 
+                                    itemData={item} 
+                                    writeHandler={setEi}
+                                    index={index}
+                                />
+                            ))
+                        }
+                        <button 
+                            className={`${styles.new_item} normal_button`} 
+                            onClick={onAddItemHandler}
+                        >
+                            + Add New Item
+                        </button>
                     </div>
                 </div>
-                <div ref={refButtons} className={`${styles.buttons}`} >
+                <div ref={refButtons} className={`${styles.buttons} buttons`} >
                     <button className={`${styles.reverse_normal_button}`} >Discard</button>
                     <button className={`${styles.save}`} >Save as Draft</button>
                     <button className={`purple_button`} >Save & Send</button>

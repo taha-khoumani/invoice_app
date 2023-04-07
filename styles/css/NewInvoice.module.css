@@ -34,7 +34,7 @@
 }
 
 .buttons {
-  box-shadow: 0px -2px 80px 0px rgba(0, 0, 0, 0.2);
+  position: relative;
   padding: 20px 56px 32px;
   display: flex;
   gap: 8px;
@@ -161,12 +161,37 @@
   }
 }
 
+.items_wraper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 .items_wraper .items_title {
   color: #777F98;
   font-weight: 700;
   font-size: 24px;
   margin: 0;
   font-size: 18px;
+}
+.items_wraper .new_item {
+  width: 100%;
+}
+.items_wraper .items_header {
+  display: flex;
+  gap: 12px;
+}
+.items_wraper .items_header_name {
+  width: 40%;
+}
+.items_wraper .items_header_qty {
+  width: 11%;
+  min-width: 60px;
+}
+.items_wraper .items_header_price {
+  width: 20%;
+}
+.items_wraper .items_header_total {
+  width: 8.5%;
 }
 
 .section_title {

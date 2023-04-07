@@ -2,29 +2,51 @@ import React, { FormEvent } from 'react'
 import styles from '@/styles/css/TextInput.module.css'
 
 interface props{
-    label:string,
+    label:string | false,
     customStyles?:string;
-
-    // onClick:(e:FormEvent)=>{
-
-    // }
+    size?:number,
+    type?:string,
+    style?:object,
+    min?:number,
+    name?:string,
+    value?:string|number,
+    onInput?:(e:FormEvent)=>void
 }
 
 export default function TextInput(props:props) {
-    const {label,customStyles} = props
+    const {
+        value,
+        style,
+        label,
+        customStyles,
+        size,
+        type,
+        min,
+        onInput,
+        name
+    } = props
 
   return (
     <div className={`${styles.input_wrapper} ${customStyles}`} >
-        <label 
-            className={`input_label`} 
-            // htmlFor=""
-        >
-            {label}
-        </label>
+        {
+            label  &&
+            <label 
+                className={`input_label`} 
+                // htmlFor=""
+            >
+                {label}
+            </label>
+        }
         <input 
-            size={1}
-            type="text" 
+            size={size ? size : 1}
+            type={type ? type : "text" }
             className={`input_input`}
+            style={style}
+            name={name}
+            min={min}
+            data-oninput={oninput}
+            value={value}
+            onInput={onInput}
         />
     </div>
   )
