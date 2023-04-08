@@ -4,6 +4,19 @@
     display: flex;
     gap: $itemGap;
     align-items: center;
+    flex-wrap: wrap;
+
+    @include media($itemOnMobile){
+        margin-bottom: 49px;
+    }
+
+    label{
+        display: none;
+        @include media($itemOnMobile){
+            display:block;
+        }
+    }
+
     i{
         margin-left: auto;
         color: #888EB0;
@@ -17,6 +30,10 @@
 
 .name{
     width: $name;
+    @include media($itemOnMobile){
+        min-width: 100%;
+        margin-bottom: 5px;
+    }
 }
 .qty{
     padding-left: 0 !important;
@@ -24,6 +41,9 @@
     width: $qty;
     min-width: 60px;
     size: 5;
+    @include media($itemOnMobile){
+        width: 20%;
+    }
 }
 .price{
     width: $price;
@@ -39,10 +59,32 @@
     input[type=number] {
         -moz-appearance: textfield;
     }
+
+    @include media($itemOnMobile){
+        width: 30%;
+    }
 }
 
 .total{
-    color:#888EB0;
-    width: $total;
-    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    gap:9px;
+    label{
+        display: none;
+        @include p();
+        @include media($itemOnMobile){
+            display: block;
+        }
+    }
+    p{
+        color:#888EB0;
+        width: $total;
+        font-weight: bold;
+        font-size: 15px;
+        letter-spacing: -0.5px;
+        @include media($itemOnMobile){
+            width: 17%;
+            padding-block:15px;
+        }
+    }
 }

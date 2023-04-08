@@ -29,7 +29,6 @@
 .write_invoice_second_half {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   max-height: 100vh;
 }
 
@@ -173,12 +172,22 @@
   margin: 0;
   font-size: 18px;
 }
+@media (max-width: 500px) {
+  .items_wraper .items_title {
+    margin-bottom: 15px;
+  }
+}
 .items_wraper .new_item {
   width: 100%;
 }
 .items_wraper .items_header {
   display: flex;
   gap: 12px;
+}
+@media (max-width: 500px) {
+  .items_wraper .items_header {
+    display: none;
+  }
 }
 .items_wraper .items_header_name {
   width: 40%;
@@ -199,6 +208,7 @@
   font-weight: 500;
   font-size: 13px;
   margin: 0;
+  font-weight: bold;
   margin-bottom: 24px;
 }
 

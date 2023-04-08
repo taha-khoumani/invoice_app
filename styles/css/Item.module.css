@@ -2,6 +2,20 @@
   display: flex;
   gap: 12px;
   align-items: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 500px) {
+  .item {
+    margin-bottom: 49px;
+  }
+}
+.item label {
+  display: none;
+}
+@media (max-width: 500px) {
+  .item label {
+    display: block;
+  }
 }
 .item i {
   margin-left: auto;
@@ -16,6 +30,12 @@
 .name {
   width: 40%;
 }
+@media (max-width: 500px) {
+  .name {
+    min-width: 100%;
+    margin-bottom: 5px;
+  }
+}
 
 .qty {
   padding-left: 0 !important;
@@ -23,6 +43,11 @@
   width: 11%;
   min-width: 60px;
   size: 5;
+}
+@media (max-width: 500px) {
+  .qty {
+    width: 20%;
+  }
 }
 
 .price {
@@ -38,9 +63,38 @@
 .price input[type=number] {
   -moz-appearance: textfield;
 }
+@media (max-width: 500px) {
+  .price {
+    width: 30%;
+  }
+}
 
 .total {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.total label {
+  display: none;
+  font-weight: 500;
+  font-size: 13px;
+  margin: 0;
+}
+@media (max-width: 500px) {
+  .total label {
+    display: block;
+  }
+}
+.total p {
   color: #888EB0;
   width: 8.5%;
   font-weight: bold;
+  font-size: 15px;
+  letter-spacing: -0.5px;
+}
+@media (max-width: 500px) {
+  .total p {
+    width: 17%;
+    padding-block: 15px;
+  }
 }

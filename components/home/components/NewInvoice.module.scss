@@ -29,9 +29,9 @@
 .write_invoice_second_half{
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
-    // box-sizing: border-box;
     max-height: 100vh;
+    // overflow-y: scroll;
+
 }
 
 .buttons{
@@ -163,6 +163,9 @@
         color: #777F98;
         @include hm();
         font-size: 18px;
+        @include media($itemOnMobile){
+            margin-bottom: 15px;
+        }
     }
 
     .new_item{
@@ -172,6 +175,9 @@
     .items_header{
         display: flex;
         gap:$itemGap;
+        @include media($itemOnMobile){
+            display: none;
+        }
     }
 
     //layout
@@ -194,6 +200,7 @@
 .section_title{
     color: $purpleFA;
     @include p();
+    font-weight: bold;
     margin-bottom:24px;
 }
 .input_label{

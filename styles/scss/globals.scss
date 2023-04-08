@@ -70,7 +70,7 @@ p{
     .write{
         background-color: #141625;
     }
-    .input_label{
+    .input_label,.item_total{
         color: #DFE3FA;
     }
     .invoice,.on_mobile_write,.main{
@@ -131,7 +131,7 @@ p{
         background-color: white;
         box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
     }
-    .input_label{
+    .input_label,.item_total{
         color: $purpleC3;
     }
     .input_input{

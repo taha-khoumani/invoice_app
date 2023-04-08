@@ -61,14 +61,14 @@ export default function Item(props:props) {
   return (
     <div className={`${styles.item}`} >
       <TextInput 
-          label={false}
+          label={'Item Name'}
           customStyles={styles.name}
           value={name}
           name={'name'}
           onInput={onInputHandler}
       />
       <TextInput 
-          label={false}
+          label={'Qty.'}
           customStyles={styles.qty}
           type={'number'}
           min={1}
@@ -76,20 +76,23 @@ export default function Item(props:props) {
             paddingRight:'10px',
             paddingLeft:'10px',
           }}
-          value={quantity}
+          value={quantity === 0 ? '' : quantity}
           name={'quantity'}
           onInput={onInputHandler}
       />
       <TextInput
-          label={false}
+          label={'Price'}
           type={"number"}
           customStyles={`${styles.price}`}
-          value={price}
+          value={price === 0 ? '': price}
           size={1}
           name={'price'}
           onInput={onInputHandler}
       />
-      <p className={`${styles.total}`} >{`${total}.00`}</p>
+      <div className={`${styles.total}`}>
+          <label className='item_total' >Total</label>
+        <p  >{`${total}$`}</p>
+      </div>
       <i 
         className="fa-solid fa-trash"
         onClick={onDeleteHandler}

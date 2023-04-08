@@ -5,7 +5,6 @@ import { toggleNewInvoice } from '@/redux/slices/uiSlice';
 import TextInput from './components/TextInput';
 import { setModaleStyles } from '@/lib/functions';
 import Item from './components/Item';
-import { TIMEOUT } from 'dns';
 
 interface props {
     isNewInvoiceOpen:boolean
@@ -58,7 +57,7 @@ export default function NewInvoice(props:props) {
             ...prev,
             {
                 name:"",
-                quantity:0,
+                quantity:0.00,
                 price:0.00,
                 total:0.00
             }
@@ -156,6 +155,7 @@ export default function NewInvoice(props:props) {
                         {
                             ei.map((item,index)=>(
                                 <Item 
+                                    key={index}
                                     itemData={item} 
                                     writeHandler={setEi}
                                     index={index}
