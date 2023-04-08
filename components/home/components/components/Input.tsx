@@ -10,10 +10,11 @@ interface props{
     min?:number,
     name?:string,
     value?:string|number,
-    onInput?:(e:FormEvent)=>void
+    onInput?:(e:FormEvent)=>void,
+    ref?:React.MutableRefObject<null>,
 }
 
-export default function TextInput(props:props) {
+export default function Input(props:props) {
     const {
         value,
         style,
@@ -23,7 +24,8 @@ export default function TextInput(props:props) {
         type,
         min,
         onInput,
-        name
+        name,
+        ref
     } = props
 
   return (
@@ -47,6 +49,7 @@ export default function TextInput(props:props) {
             data-oninput={oninput}
             value={value}
             onInput={onInput}
+            ref={ref}
         />
     </div>
   )

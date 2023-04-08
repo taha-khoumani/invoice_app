@@ -78,6 +78,13 @@ p {
 .dark .input_label, .dark .item_total {
   color: #DFE3FA;
 }
+.dark .payment_options {
+  background-color: #252945;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+}
+.dark .payment_options p {
+  border-bottom: 1px solid #1E2139;
+}
 .dark .invoice, .dark .on_mobile_write, .dark .main {
   background-color: #1E2139;
 }
@@ -126,6 +133,9 @@ p {
 .dark .buttons {
   box-shadow: 0px -15px 80px 0px rgba(0, 0, 0, 0.8);
 }
+.dark .date input::-webkit-calendar-picker-indicator {
+  filter: invert(100%);
+}
 
 .light {
   color: black;
@@ -144,17 +154,24 @@ p {
 .light .write {
   background-color: white;
 }
-.light .invoice, .light .on_mobile_write, .light .main {
+.light .payment_options {
+  background-color: white;
+  box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
+}
+.light .payment_options p {
+  border-bottom: 1px solid #DFE3FA;
+}
+.light .invoice, .light .on_mobile_write, .light .main, .light .payment_options {
   background-color: white;
 }
-.light .invoice .due, .light .invoice .name, .light .on_mobile_write .due, .light .on_mobile_write .name, .light .main .due, .light .main .name {
+.light .invoice .due, .light .invoice .name, .light .on_mobile_write .due, .light .on_mobile_write .name, .light .main .due, .light .main .name, .light .payment_options .due, .light .payment_options .name {
   color: #7E88C3;
 }
-.light .invoice .draft, .light .on_mobile_write .draft, .light .main .draft {
+.light .invoice .draft, .light .on_mobile_write .draft, .light .main .draft, .light .payment_options .draft {
   color: #373B53;
   background-color: rgba(55, 59, 83, 0.2);
 }
-.light .invoice .draft i, .light .on_mobile_write .draft i, .light .main .draft i {
+.light .invoice .draft i, .light .on_mobile_write .draft i, .light .main .draft i, .light .payment_options .draft i {
   color: #373B53;
 }
 .light .normal_button {

@@ -73,6 +73,13 @@ p{
     .input_label,.item_total{
         color: #DFE3FA;
     }
+    .payment_options{
+        background-color: #252945 ;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+        p{
+            border-bottom: 1px solid #1E2139;
+        }
+    }
     .invoice,.on_mobile_write,.main{
         background-color: #1E2139 ;
 
@@ -123,6 +130,10 @@ p{
     .buttons{
         box-shadow: 0px -15px 80px 0px rgba($color: #000000, $alpha: 0.8);
     }
+    .date input::-webkit-calendar-picker-indicator {
+        filter: invert(100%);
+        
+    }
 }
 .light{
     color: black;
@@ -140,7 +151,14 @@ p{
     .write{
         background-color: white;
     }
-    .invoice,.on_mobile_write,.main{
+    .payment_options{
+        background-color: white;
+        box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
+        p{
+            border-bottom: 1px solid #DFE3FA;
+        }
+    }
+    .invoice,.on_mobile_write,.main,.payment_options{
         background-color: white;
 
         //due-date&client-name

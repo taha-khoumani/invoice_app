@@ -154,6 +154,75 @@
     }
 }
 
+.other_infos{
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+
+
+    .date{
+        flex-basis: calc(50% - 12px);
+        @include media(420px){
+            flex-basis: 100%;
+        }
+    }
+
+    .payment{
+        display: flex;
+        flex-direction: column;
+        gap:9px;
+        flex-basis: calc(50% - 12px);
+        @include media(420px){
+            flex-basis: 100%;
+        }
+
+        .payment_label{
+            @include p();
+        }
+        .payment_input{
+            position: relative;
+            .chosen_payment{
+                display: flex;
+                justify-content: space-between;
+                border-radius: 4px;
+                cursor: pointer;
+                padding:15px ;
+                @include hs();
+                outline:none;
+                letter-spacing: -0.25;
+                &:focus{
+                    border-color: #9277FF;
+                }
+                i{
+                    color:#7C5DFA;
+                }
+            }
+            .payment_options{
+                position: absolute;
+                border-radius: 8px;
+                inset: 55px 0 auto;
+                p{
+                    padding:16px 24px;
+                    font-size: 15px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    &:hover{
+                        color:$purpleFA;
+                    }
+                }
+                p:last-child{
+                    border:none;
+                }
+            }
+        }
+    }
+
+    .project_description{
+        width: 100%;
+    }
+}
+
+
 .items_wraper{
     display: flex;
     flex-direction: column;

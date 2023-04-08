@@ -1,5 +1,5 @@
 import React, { FormEvent, InputHTMLAttributes, InsHTMLAttributes, KeyboardEvent, ReactEventHandler, SyntheticEvent, useEffect } from 'react'
-import TextInput from './TextInput'
+import TextInput from './Input'
 import styles from '@/styles/css/Item.module.css'
 
 interface props{
