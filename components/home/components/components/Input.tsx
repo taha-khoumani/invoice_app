@@ -12,6 +12,7 @@ interface props{
     value?:string|number,
     onInput?:(e:FormEvent)=>void,
     ref?:React.MutableRefObject<null>,
+    onChange?:(e:FormEvent)=>void,
 }
 
 export default function Input(props:props) {
@@ -25,7 +26,8 @@ export default function Input(props:props) {
         min,
         onInput,
         name,
-        ref
+        ref,
+        onChange
     } = props
 
   return (
@@ -50,6 +52,7 @@ export default function Input(props:props) {
             value={value}
             onInput={onInput}
             ref={ref}
+            onChange={onChange}
         />
     </div>
   )

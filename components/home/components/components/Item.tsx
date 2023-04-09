@@ -10,52 +10,55 @@ interface props{
     price:number,
     total:number,
   }
-  writeHandler:(
-    React.Dispatch<React.SetStateAction<{
-      name: string;
-      quantity: number;
-      price: number;
-      total: number;
-    }[]>>
-  )
+  writeHandler?:(index: number, name: string, value: string | number)=>void
+  deleteHandler?:(index:number)=>void
 }
 
 export default function Item(props:props) {
-  const {itemData,writeHandler,index} = props
+  const {itemData,writeHandler,index,deleteHandler} = props
   const {name,quantity,price,total} = itemData
 
   function onDeleteHandler(){
-    writeHandler(prev=>{
-      return prev.filter((item,indexa)=>indexa !== index)
-    })
+    if(deleteHandler){
+      deleteHandler(index)
+    }
   }
 
   function onInputHandler(e:FormEvent){
     const { name,value } = e.target as HTMLButtonElement;
-    writeHandler(prev=>(
-      prev.map((item,indexa)=>(
-        indexa === index ?
-        {
-          ...item,
-          [name]:value,
-        } : 
-        item
-      ))
-    ))
+    // writeHandler(prevData=>({
+    //   ...prevData,
+    //   items: prevData.items.map((item,indexa)=>(
+    //     // indexa === index ?
+    //     // {
+    //     //   ...item,
+    //     //   [name]:value,
+    //     // } : 
+    //     item
+    //   ))
+    //   // prevData.items.map((item,indexa)=>(
+    //   // ))
+    // }))
+    if(writeHandler){
+      writeHandler(index,name,value)
+    }
   }
 
   //calculate_total
   useEffect(()=>{
-    writeHandler(prev=>(
-      prev.map((item,indexa)=>(
-        indexa === index ?
-        {
-          ...item,
-          total:quantity*price,
-        } : 
-        item
-      ))
-    ))
+    // writeHandler(prev=>(
+    //   prev.map((item,indexa)=>(
+    //     indexa === index ?
+    //     {
+    //       ...item,
+    //       total:quantity*price,
+    //     } : 
+    //     item
+    //   ))
+    // ))
+    if(writeHandler){
+      writeHandler(index,'total',price*quantity)
+    }
   },[price,quantity])
 
   return (
