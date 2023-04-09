@@ -1,0 +1,150 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 30px;
+  color: #3A4374;
+  margin: 0;
+}
+
+.password {
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.thirdPartyAuth {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.thirdPartyAuth button {
+  padding: 13px 0px;
+  width: 100%;
+  background-color: white;
+  border: solid 1px gray;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  gap: 20px;
+}
+.thirdPartyAuth button:hover {
+  background-color: rgba(128, 128, 128, 0.2);
+}
+@media (max-width: 767px) {
+  .thirdPartyAuth button {
+    padding: 13px 15px;
+  }
+}
+
+.next {
+  margin: 0 10px 0 auto;
+  display: block;
+}
+@media (max-width: 767px) {
+  .next {
+    width: 100%;
+  }
+}
+
+.otherOption p {
+  margin: 0;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .otherOption p a {
+    margin-top: 5px;
+    display: block;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.buttons a {
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.buttons a, .buttons button {
+  text-align: center;
+  margin: 0;
+  flex-basis: 100%;
+}
+@media (max-width: 767px) {
+  .buttons {
+    flex-direction: column-reverse;
+  }
+  .buttons button, .buttons a {
+    width: 100%;
+  }
+}
+
+.succes, .error, .pending {
+  border-radius: 5px;
+  display: flex;
+  position: absolute;
+  inset: 10px 0 auto 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 350px;
+}
+.succes p, .error p, .pending p {
+  font-weight: bold;
+  margin: auto;
+  height: auto;
+}
+.succes div, .error div, .pending div {
+  min-height: 100%;
+  display: inline-flex;
+}
+.succes div i, .error div i, .pending div i {
+  padding: 7px;
+  font-size: 30px;
+  margin: auto 0;
+}
+
+.succes {
+  border: solid 3px #45C45B;
+}
+.succes div {
+  background-color: #45C45B;
+}
+
+.error {
+  border: solid 3px #FE6868;
+}
+.error div {
+  background-color: #FE6868;
+}
+
+.pending {
+  border: solid 3px rgba(0, 0, 255, 0.6);
+}
+.pending div {
+  background-color: rgba(0, 0, 255, 0.6);
+}
+.pending div i {
+  animation-name: spiner;
+  animation-duration: 950ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes spiner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

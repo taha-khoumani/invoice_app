@@ -1,11 +1,12 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import React, { DOMElement, FormEvent, useEffect, useRef, useState } from 'react'
 import styles from '@/styles/css/NewInvoice.module.css'
 import { useDispatch } from 'react-redux';
 import { toggleNewInvoice } from '@/redux/slices/uiSlice';
 import Input from './components/Input';
-import { setModaleStyles } from '@/lib/functions';
+import { setModaleStyles, validateInvoiceData } from '@/lib/functions';
 import Item from './components/Item';
 import { nanoid } from 'nanoid';
+import AuthFeedback from '@/components/ui/AuthFeedback';
 
 interface props {
     isNewInvoiceOpen:boolean
@@ -18,7 +19,7 @@ interface item {
     total: number
 }
 
-interface invoice {
+export interface invoice {
     id:string,
     createdAt:Date,
     paymentDue:string,
@@ -48,14 +49,15 @@ export default function NewInvoice(props:props) {
 
   if(!isNewInvoiceOpen) return null;
 
+  const dispatch = useDispatch()
+
+  //useRefs
   const refForm = useRef(null)
   const refButtons = useRef(null)
   const wrapperRef = useRef(null)
   const paymentOptionsRef = useRef(null)
   const paymentWrapper = useRef(null)
-//   const dateRef = useRef(null)
 
-  const dispatch = useDispatch()
 
   //event-handlers
   function onScrollHandler(){
@@ -120,7 +122,30 @@ export default function NewInvoice(props:props) {
         [name]:value
     }))
   }
+  function onSubmitHandler(message:string){
+    //pending
+    setAuthFeedbackData({status:'pending',message:message})
+    
+    //validate-data
+    if(validateInvoiceData(invoiceData).status === 'error'){
+        setTimeout(()=>setAuthFeedbackData(validateInvoiceData(invoiceData)),100)
+        return;
+    }
+    
+    //pending
+    setAuthFeedbackData({status:'pending',message:message})
 
+    //send data to database
+
+    if(false){
+        setAuthFeedbackData({status:'error',message:'feedback-error-message'})
+    }else{
+        setAuthFeedbackData({status:'succes',message:'feedback-succes-message'})
+    }
+
+  }
+
+  //inline-styles
   const borderColor = {
     borderColor:'#9277FF'
   }
@@ -182,7 +207,8 @@ export default function NewInvoice(props:props) {
     ],
     total: 0.00
   })
-
+  const [authFeedbackData,setAuthFeedbackData] = useState({})
+  console.log('state',authFeedbackData)
   return (
     <div 
         className={`${styles.write_invoice_first_wrapper}`}
@@ -193,6 +219,10 @@ export default function NewInvoice(props:props) {
             onClick={(e)=>e.stopPropagation()}
         >
             <div className={`${styles.write_invoice_second_half_wrapper}`} id='form_wrapper' ref={wrapperRef} >
+                {
+                    Object.keys(authFeedbackData).length !== 0 && 
+                    <AuthFeedback data={authFeedbackData} />
+                }
                 <div 
                     ref={refForm} 
                     className={`${styles.write_invoice_third_wrapper}`}
@@ -366,12 +396,38 @@ export default function NewInvoice(props:props) {
                     </div>
                 </div>
                 <div ref={refButtons} className={`${styles.buttons} buttons`} >
-                    <button className={`${styles.reverse_normal_button}`} >Discard</button>
-                    <button className={`${styles.save}`} >Save as Draft</button>
+                    <button 
+                        className={`${styles.reverse_normal_button}`} 
+                        onClick={onCancelHandler}
+                    >
+                        Discard
+                    </button>
+                    <button 
+                        className={`${styles.save}`} 
+                        onClick={()=>{
+                            //set-status
+                            setInvoiceData(prevData=>({
+                                ...prevData,
+                                status:'draft',
+                            }))
+
+                            //submitData
+                            onSubmitHandler('Saving as Draft')
+                        }}
+                    >
+                        Save as Draft
+                    </button>
                     <button 
                         className={`purple_button`} 
                         onClick={()=>{
-                            console.log(invoiceData)
+                            //set-status
+                            setInvoiceData(prevData=>({
+                                ...prevData,
+                                status:'pending',
+                            }))
+
+                            //submitData
+                            onSubmitHandler('Sending Invoice')
                         }}
                     >Save & Send</button>
                 </div>

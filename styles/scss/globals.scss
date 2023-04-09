@@ -134,6 +134,9 @@ p{
         filter: invert(100%);
         
     }
+    .auth_feedback{
+        background-color: #1E2139;
+    }
 }
 .light{
     color: black;
@@ -202,6 +205,12 @@ p{
     .buttons{
         box-shadow: 0px -2px 80px 0px rgba($color: #000000, $alpha: 0.2);
     }
+    .auth_feedback{
+        background-color: white;
+        i{
+            color: white;
+        }
+    }
 }
 
 .bolds{
@@ -238,3 +247,20 @@ p{
     i{color:$s_orange;}
 }
 //draft is considered in dark/light mode
+.feedbackAnimation{
+    animation-name: pop;
+    animation-duration: 1000ms;
+    animation-fill-mode: forwards;
+}
+@keyframes pop {
+    0%{
+        top:-100%;
+        opacity: 1;
+    }
+    50%{
+        top:10px;
+    }
+    100%{
+        opacity: 0;
+    }
+}

@@ -136,6 +136,9 @@ p {
 .dark .date input::-webkit-calendar-picker-indicator {
   filter: invert(100%);
 }
+.dark .auth_feedback {
+  background-color: #1E2139;
+}
 
 .light {
   color: black;
@@ -203,6 +206,12 @@ p {
 .light .buttons {
   box-shadow: 0px -2px 80px 0px rgba(0, 0, 0, 0.2);
 }
+.light .auth_feedback {
+  background-color: white;
+}
+.light .auth_feedback i {
+  color: white;
+}
 
 .bolds {
   font-weight: bold !important;
@@ -244,4 +253,23 @@ p {
 }
 .pending i {
   color: #FF8F00;
+}
+
+.feedbackAnimation {
+  animation-name: pop;
+  animation-duration: 1000ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes pop {
+  0% {
+    top: -100%;
+    opacity: 1;
+  }
+  50% {
+    top: 10px;
+  }
+  100% {
+    opacity: 0;
+  }
 }
