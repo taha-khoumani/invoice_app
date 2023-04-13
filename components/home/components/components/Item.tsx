@@ -1,6 +1,7 @@
 import React, { FormEvent, InputHTMLAttributes, InsHTMLAttributes, KeyboardEvent, ReactEventHandler, SyntheticEvent, useEffect } from 'react'
 import TextInput from './Input'
 import styles from '@/styles/css/Item.module.css'
+import { type } from 'os'
 
 interface props{
   index:number,
@@ -26,36 +27,21 @@ export default function Item(props:props) {
 
   function onInputHandler(e:FormEvent){
     const { name,value } = e.target as HTMLButtonElement;
-    // writeHandler(prevData=>({
-    //   ...prevData,
-    //   items: prevData.items.map((item,indexa)=>(
-    //     // indexa === index ?
-    //     // {
-    //     //   ...item,
-    //     //   [name]:value,
-    //     // } : 
-    //     item
-    //   ))
-    //   // prevData.items.map((item,indexa)=>(
-    //   // ))
-    // }))
     if(writeHandler){
       writeHandler(index,name,value)
     }
   }
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const key = event.key;
+    // Check if the key pressed is a minus sign
+    if (key === "-") {
+      // If it's a minus sign, prevent default behavior
+      event.preventDefault();
+    }
+  };
 
   //calculate_total
   useEffect(()=>{
-    // writeHandler(prev=>(
-    //   prev.map((item,indexa)=>(
-    //     indexa === index ?
-    //     {
-    //       ...item,
-    //       total:quantity*price,
-    //     } : 
-    //     item
-    //   ))
-    // ))
     if(writeHandler){
       writeHandler(index,'total',price*quantity)
     }
@@ -82,6 +68,7 @@ export default function Item(props:props) {
           value={quantity === 0 ? '' : quantity}
           name={'quantity'}
           onInput={onInputHandler}
+          onKeyDown={handleKeyDown}
       />
       <TextInput
           label={'Price'}
@@ -91,6 +78,7 @@ export default function Item(props:props) {
           size={1}
           name={'price'}
           onInput={onInputHandler}
+          onKeyDown={handleKeyDown}
       />
       <div className={`${styles.total}`}>
           <label className='item_total' >Total</label>

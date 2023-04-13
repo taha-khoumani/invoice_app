@@ -1,0 +1,26 @@
+@import '../../styles/scss/reusables';
+
+.deleteWrapper{
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    max-width: 380px;
+}
+
+.title{
+    @include hm();
+}
+
+.description{
+    @include p();
+    line-height: 25px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap:8px;
+    @include media_mini_mobile{
+        justify-content: space-around;
+    }
+}

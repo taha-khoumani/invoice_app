@@ -3,6 +3,7 @@ import styles from '@/styles/css/Invoice.module.css'
 import rightArrow from '@/public/icon-arrow-right.svg'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { formatDate } from '@/lib/functions'
 
 interface invoice {
     id:string,
@@ -27,7 +28,7 @@ export default function Invoice(props:props) {
 
     function onClickHandler(){
         router.push(`/${id}`)
-    }
+    } 
 
   return (
     <div 
@@ -39,7 +40,7 @@ export default function Invoice(props:props) {
                 <span>#</span>
                 {id}
             </p> 
-            <p className={`${styles.due} due`} >Due {paymentDue}</p>
+            <p className={`${styles.due} due`} >Due {formatDate(paymentDue)}</p>
 
             {/* if desktop --> css */}
             <p className={`${styles.name_desktop} name`} >{clientName}</p>
@@ -52,7 +53,7 @@ export default function Invoice(props:props) {
             <p className={`${styles.name_mobile} name`} >{clientName}</p>
 
             {/* if desktop --> css */}
-            <p className={styles.total_desktop} >{total} $</p>
+            <p className={styles.total_desktop} >{total.toLocaleString()} $</p>
 
             <button className={status} >
                 <i className="fa-solid fa-circle"></i>

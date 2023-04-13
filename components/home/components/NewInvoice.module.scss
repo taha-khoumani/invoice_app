@@ -92,6 +92,9 @@
 //childs
 .title{
     @include hm();
+    span{
+        color: #888EB0;
+    }
 }
 
 .from_inputs{

@@ -5,6 +5,8 @@ const initialState = {
     isFilterOn:false,
     filter:'All',
     isNewInvoiceOpen:false,
+    isEditInvoiceOpen:false,
+    isDeleteModuleOpen:false,
 }
 
 const uiSlice = createSlice({
@@ -23,8 +25,14 @@ const uiSlice = createSlice({
         toggleNewInvoice:(state,{payload})=>{
             state.isNewInvoiceOpen = payload
         },
+        toggleEditInvoice:(state,{payload})=>{
+            state.isEditInvoiceOpen = payload
+        },
+        toggleDeleteModule:(state,{payload})=>{
+            state.isDeleteModuleOpen = payload
+        },
     }
 })
 
 export default uiSlice.reducer
-export const {setTheme,toggleFilter,setFilter,toggleNewInvoice} = uiSlice.actions
+export const {setTheme,toggleFilter,setFilter,toggleNewInvoice,toggleEditInvoice,toggleDeleteModule} = uiSlice.actions

@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import React from 'react'
 import styles from '@/styles/css/InvoiceDetails.module.css'
+import { useDispatch } from 'react-redux'
+import { toggleDeleteModule, toggleEditInvoice } from '@/redux/slices/uiSlice'
+import { formatDate, setModaleStyles } from '@/lib/functions'
 
 interface props {
   desiredInvoice:{
@@ -49,6 +52,8 @@ export default function InvoiceDetails(props:props) {
     items,
     total,
   } = props.desiredInvoice
+  const dispatch = useDispatch()
+
 
   function firstToCapital(status:string):string{
     return status[0].toUpperCase()+status.slice(1)
@@ -56,8 +61,24 @@ export default function InvoiceDetails(props:props) {
 
   const writeButtons = (
     <div className={styles.write_buttons} >
-      <button className='normal_button' >Edit</button>
-      <button className='delete_button' >Delete</button>
+      <button 
+        className='normal_button'
+        onClick={()=>{
+          setModaleStyles(true)
+          dispatch(toggleEditInvoice(true))
+        }}
+      >
+        Edit
+      </button>
+      <button 
+        className='delete_button' 
+        onClick={()=>{
+          setModaleStyles(true)
+          dispatch(toggleDeleteModule(true))
+        }}
+      >
+        Delete
+      </button>
       <button className='purple_button' >Mark as Paid</button>
     </div>
   )
@@ -90,7 +111,7 @@ export default function InvoiceDetails(props:props) {
           {/* main section */}
           <div className={`${styles.main} main`} >
             {/* first section */}
-            <div className={`${styles.main_top}`}  >
+            <div className={`${styles.main_top} global_main_top`}  >
               <div>
                 <p className={`${styles.id} ${"bolds"}`} >
                   <span>#</span>
@@ -107,18 +128,18 @@ export default function InvoiceDetails(props:props) {
             </div>
 
             {/* middle section */}
-            <div className={styles.main_mid}  >
+            <div className={`${styles.main_mid} global_main_mid`}  >
 
               {/* middle left section */}
               <div className={styles.main_mid_left}   >
                 <div className={styles.dates} >
                   <div>
                     <p>Invoice Date</p>
-                    <p className={"bolds"} >{createdAt}</p>
+                    <p className={"bolds"} >{formatDate(createdAt)}</p>
                   </div>
                   <div>
                     <p> Payment Due</p>
-                    <p className={"bolds"} >{paymentDue}</p>
+                    <p className={"bolds"} >{formatDate(paymentDue)}</p>
                   </div>
                 </div>
                 <div className={styles.to_infos} >
@@ -176,8 +197,8 @@ export default function InvoiceDetails(props:props) {
               </div>
               <div className={`total_details ${styles.total_details_mobile}`}>
                 {
-                  items.map(item=>(
-                    <div>
+                  items.map((item,index)=>(
+                    <div key={index}>
                       <div>
                         <p>{item.name}</p>
                         <p>{`${item.quantity} x ${item.price} $`}</p>

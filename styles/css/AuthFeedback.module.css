@@ -98,6 +98,8 @@
   margin-left: auto;
   margin-right: auto;
   width: 350px;
+  max-width: 80%;
+  z-index: 10000000000;
 }
 .succes p, .error p, .pending p {
   font-weight: bold;

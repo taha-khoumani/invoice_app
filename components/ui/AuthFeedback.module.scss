@@ -111,6 +111,8 @@ $mobile:767px;
     margin-left: auto; 
     margin-right: auto; 
     width: 350px;
+    max-width: 80%;
+    z-index: 10000000000;
 
     p{
         font-weight: bold;

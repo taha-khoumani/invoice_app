@@ -1,0 +1,18 @@
+.module {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inset: 0;
+}
+.module .content {
+  max-width: 70%;
+  border-radius: 8px;
+  padding: 50px;
+}
+@media (max-width: 767px) {
+  .module .content {
+    padding: 35px;
+  }
+}

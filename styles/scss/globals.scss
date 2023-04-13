@@ -63,6 +63,12 @@ p{
 .dark{
     color: white ;
     background-color: $blackBG;
+    .total_details,.global_main_mid,.global_main_top{
+        p{
+            @include p();
+            color: #DFE3FA;
+        }
+    }
     .filter_options{
         background-color: $black45;
         box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25) ;
@@ -80,7 +86,7 @@ p{
             border-bottom: 1px solid #1E2139;
         }
     }
-    .invoice,.on_mobile_write,.main{
+    .invoice,.on_mobile_write,.main,.content{
         background-color: #1E2139 ;
 
         //due-date&client-name
@@ -141,6 +147,12 @@ p{
 .light{
     color: black;
     background-color: $whiteBG;
+    .total_details,.global_main_mid,.global_main_top{
+        p{
+            @include p();
+            color:$purpleC3;
+        }
+    }
     .filter_options{
         background-color: white;
         box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
@@ -161,7 +173,7 @@ p{
             border-bottom: 1px solid #DFE3FA;
         }
     }
-    .invoice,.on_mobile_write,.main,.payment_options{
+    .invoice,.on_mobile_write,.main,.payment_options,.content{
         background-color: white;
 
         //due-date&client-name

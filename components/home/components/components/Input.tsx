@@ -13,6 +13,7 @@ interface props{
     onInput?:(e:FormEvent)=>void,
     ref?:React.MutableRefObject<null>,
     onChange?:(e:FormEvent)=>void,
+    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void,
 }
 
 export default function Input(props:props) {
@@ -27,7 +28,8 @@ export default function Input(props:props) {
         onInput,
         name,
         ref,
-        onChange
+        onChange,
+        onKeyDown
     } = props
 
   return (
@@ -53,6 +55,7 @@ export default function Input(props:props) {
             onInput={onInput}
             ref={ref}
             onChange={onChange}
+            onKeyDown={onKeyDown}
         />
     </div>
   )

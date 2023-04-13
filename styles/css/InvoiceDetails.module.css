@@ -118,12 +118,6 @@
 .main .main_top .id span {
   color: #888EB0;
 }
-.main .main_top p {
-  font-weight: 500;
-  font-size: 13px;
-  margin: 0;
-  color: #DFE3FA;
-}
 .main .main_top .from_infos p {
   margin-bottom: 5px;
   text-align: end;
@@ -137,12 +131,6 @@
 .main .main_mid {
   display: flex;
   justify-content: space-between;
-}
-.main .main_mid p {
-  font-weight: 500;
-  font-size: 13px;
-  margin: 0;
-  color: #DFE3FA;
 }
 @media (max-width: 600px) {
   .main .main_mid {
@@ -201,12 +189,6 @@
   .main .main_bottom .total_details {
     display: none;
   }
-}
-.main .main_bottom .total_details p {
-  font-weight: 500;
-  font-size: 13px;
-  margin: 0;
-  color: #DFE3FA;
 }
 .main .main_bottom .total_details .total_details_details {
   flex: 70%;

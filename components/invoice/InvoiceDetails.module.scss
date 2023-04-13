@@ -114,9 +114,9 @@
             }
         }
 
-        p{
-            @include pp()
-        }
+        // p{
+        //     @include pp()
+        // }
 
         .from_infos p{
             margin-bottom: 5px;
@@ -135,9 +135,9 @@
             display: flex;
             justify-content: space-between;
 
-            p{
-                @include pp()
-            }
+            // p{
+            //     @include pp()
+            // }
 
             @include media($phone_main){
                 flex-direction: column;
@@ -203,9 +203,9 @@
                 display: none;
             }
             
-            p{
-                @include pp()
-            }
+            // p{
+                // @include pp()
+            // }
 
             .total_details_details{
                 flex:70%;

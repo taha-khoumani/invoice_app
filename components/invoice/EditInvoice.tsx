@@ -1,16 +1,13 @@
 import React, { DOMElement, FormEvent, useEffect, useRef, useState } from 'react'
 import styles from '@/styles/css/NewInvoice.module.css'
 import { useDispatch } from 'react-redux';
-import { toggleNewInvoice } from '@/redux/slices/uiSlice';
-import Input from './components/Input';
-import { formatDate, setModaleStyles, validateInvoiceData } from '@/lib/functions';
-import Item from './components/Item';
+import { toggleEditInvoice, toggleNewInvoice } from '@/redux/slices/uiSlice';
+import Input from '../home/components/components/Input';
+import { setModaleStyles, validateInvoiceData } from '@/lib/functions';
+import Item from '../home/components/components/Item';
 import { nanoid } from 'nanoid';
 import AuthFeedback from '@/components/ui/AuthFeedback';
-
-interface props {
-    isNewInvoiceOpen:boolean
-}
+import { useSelector } from 'react-redux';
 
 interface item {
     name: string,
@@ -44,19 +41,57 @@ export interface invoice {
     total: number
 }
 
-export default function NewInvoice(props:props) {
-  const {isNewInvoiceOpen} = props
+interface props {
+    desiredInvoice:invoice,
+}
 
-  if(!isNewInvoiceOpen) return null;
+interface store{
+    ui:{
+      isEditInvoiceOpen:boolean
+    }
+}
+
+export default function EditInvoice(props:props) {
+    //state
+    const {desiredInvoice} = props
+    const {isEditInvoiceOpen} = useSelector((store:store)=>store.ui)
+    const [isPaymentOpen,togglePayment] = useState(false)
+    const [invoiceData,setInvoiceData] = useState(desiredInvoice)
+    const [authFeedbackData,setAuthFeedbackData] = useState({})
+
+    //useRefs
+    const refForm = useRef(null)
+    const refButtons = useRef(null)
+    const wrapperRef = useRef(null)
+    const paymentOptionsRef = useRef(null)
+    const paymentWrapper = useRef(null)
+
+    useEffect(()=>{
+        function toggleOff(e:FormEvent){
+            const {parentElement} = e.target as HTMLButtonElement
+            const paymentOptions = paymentOptionsRef.current
+            if(
+                !paymentOptions 
+                || 
+                paymentWrapper.current === parentElement
+                ||
+                paymentWrapper.current === parentElement?.parentElement 
+                ||
+                paymentOptions === parentElement) return;
+            togglePayment(false)
+        }
+
+        // @ts-ignore: Object is possibly 'null'.
+        if(wrapperRef.current) wrapperRef.current.addEventListener('click',toggleOff)
+
+        // @ts-ignore: Object is possibly 'null'.
+        if(wrapperRef.current) return ()=>{wrapperRef!.current!.removeEventListener('click',toggleOff)}
+    },[paymentOptionsRef])
+
+    //if not open
+    if(!isEditInvoiceOpen) return null;
 
   const dispatch = useDispatch()
-
-  //useRefs
-  const refForm = useRef(null)
-  const refButtons = useRef(null)
-  const wrapperRef = useRef(null)
-  const paymentOptionsRef = useRef(null)
-  const paymentWrapper = useRef(null)
 
   //helper-function
   function dateToYMD(date:Date) {
@@ -78,7 +113,7 @@ export default function NewInvoice(props:props) {
   }
   function onCancelHandler(){
     setModaleStyles(false)
-    dispatch(toggleNewInvoice(false))
+    dispatch(toggleEditInvoice(false))
   }
   function onAddItemHandler(){
     setInvoiceData((prevData)=>{
@@ -130,10 +165,9 @@ export default function NewInvoice(props:props) {
         [name]:value
     }))
   }
-  function onSubmitHandler(message:string){
-      console.log(invoiceData)
+  function onSubmitHandler(){
     //pending
-    setAuthFeedbackData({status:'pending',message:message})
+    setAuthFeedbackData({status:'pending',message:'Saving Changes'})
     
     //validate-data
     if(validateInvoiceData(invoiceData).status === 'error'){
@@ -141,7 +175,7 @@ export default function NewInvoice(props:props) {
         return;
     }
     //pending
-    setAuthFeedbackData({status:'pending',message:message})
+    setAuthFeedbackData({status:'pending',message:'Saving Changes'})
 
     //send data to database
 
@@ -153,70 +187,10 @@ export default function NewInvoice(props:props) {
 
   }
 
-
   //inline-styles
   const borderColor = {
     borderColor:'#9277FF'
   }
-
-  useEffect(()=>{
-
-    function toggleOff(e:FormEvent){
-        const {parentElement} = e.target as HTMLButtonElement
-        const paymentOptions = paymentOptionsRef.current
-        if(
-            !paymentOptions 
-            || 
-            paymentWrapper.current === parentElement
-            ||
-            paymentWrapper.current === parentElement?.parentElement 
-            ||
-             paymentOptions === parentElement) return;
-        togglePayment(false)
-    }
-
-    // @ts-ignore: Object is possibly 'null'.
-    wrapperRef.current.addEventListener('click',toggleOff)
-
-    // @ts-ignore: Object is possibly 'null'.
-    return ()=>{wrapperRef.current.removeEventListener('click',toggleOff)}
-  },[paymentOptionsRef])
-
-
-  //state
-  const [isPaymentOpen,togglePayment] = useState(false)
-  const [invoiceData,setInvoiceData] = useState({
-    id:`${nanoid().slice(0,6).toUpperCase()}`,
-    createdAt:dateToYMD(new Date()),
-    paymentDue: new Date().toISOString().slice(0, 10),
-    description: "",
-    paymentTerms: 14,
-    clientName: "",
-    clientEmail: "",
-    status: "",
-    senderAddress: {
-      street: "",
-      city: "",
-      postCode: "",
-      country: ""
-    },
-    clientAddress: {
-      street: "",
-      city: "",
-      postCode: "",
-      country: ""
-    },
-    items: [
-        {
-            name: "",
-            quantity: 0,
-            price: 0,
-            total:0
-        }
-    ],
-    total: 0.00
-  })
-  const [authFeedbackData,setAuthFeedbackData] = useState({})
 
   return (
     <div 
@@ -237,7 +211,7 @@ export default function NewInvoice(props:props) {
                     className={`${styles.write_invoice_third_wrapper}`}
                     onScroll={onScrollHandler}
                 >
-                    <p className={`${styles.title}`} >New Invoice</p>
+                    <p className={`${styles.title}`} >Edit <span>#</span>{invoiceData.id}</p>
                     <div className={`${styles.from}`} >
                         <p className={`${styles.section_title}`} >Bill From</p>
                         <div className={`${styles.from_inputs}`} >
@@ -322,7 +296,7 @@ export default function NewInvoice(props:props) {
                             type={'date'}
                             customStyles={`${styles.date} date`}
                             name={'paymentDue'}
-                            value={formatDate(invoiceData.paymentDue)}
+                            value={invoiceData.paymentDue}
                             onChange={onChangeHandler}
                         />
                         <div className={`${styles.payment}`} >
@@ -404,41 +378,19 @@ export default function NewInvoice(props:props) {
                         </button>
                     </div>
                 </div>
-                <div ref={refButtons} className={`${styles.buttons} buttons`} >
-                    <button 
-                        className={`${styles.reverse_normal_button}`} 
-                        onClick={onCancelHandler}
-                    >
-                        Discard
-                    </button>
+                <div ref={refButtons} style={{gap:'10px'}} className={`${styles.buttons} buttons`} >
                     <button 
                         className={`${styles.save}`} 
-                        onClick={()=>{
-                            //set-status
-                            setInvoiceData(prevData=>({
-                                ...prevData,
-                                status:'draft',
-                            }))
-
-                            //submitData
-                            onSubmitHandler('Saving as Draft')
-                        }}
+                        style={{marginLeft:'auto'}}
+                        onClick={onCancelHandler}
                     >
-                        Save as Draft
+                        Cancel
                     </button>
                     <button 
                         className={`purple_button`} 
-                        onClick={()=>{
-                            //set-status
-                            setInvoiceData(prevData=>({
-                                ...prevData,
-                                status:'pending',
-                            }))
-
-                            //submitData
-                            onSubmitHandler('Sending Invoice')
-                        }}
-                    >Save & Send</button>
+                        onClick={onSubmitHandler}
+                        style={{marginRight:'10px'}}
+                    >Save Changes</button>
                 </div>
             </div>
         </div>

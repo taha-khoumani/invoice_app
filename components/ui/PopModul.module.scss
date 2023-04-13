@@ -1,0 +1,19 @@
+@import '../../styles/scss/reusables';
+
+.module{
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inset: 0;
+    
+    .content{
+        max-width: 70%;
+        border-radius: 8px;
+        padding:50px;
+        @include media_mobile{
+            padding:35px;
+        }
+    }
+}

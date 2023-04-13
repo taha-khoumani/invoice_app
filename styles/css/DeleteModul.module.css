@@ -1,0 +1,30 @@
+.deleteWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 380px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0;
+}
+
+.description {
+  font-weight: 500;
+  font-size: 13px;
+  margin: 0;
+  line-height: 25px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+@media (max-width: 390px) {
+  .buttons {
+    justify-content: space-around;
+  }
+}

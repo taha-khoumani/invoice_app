@@ -8,7 +8,7 @@ export function setModaleStyles (isModal:boolean){
 
 interface invoice {
     id:string,
-    createdAt:Date,
+    createdAt:string,
     paymentDue:string,
     description:string,
     paymentTerms: number,
@@ -87,8 +87,90 @@ export function validateInvoiceData(invoiceData:invoice){
                 return responsBuilder(0,'Sender street Address is required.')
             }
 
+            //city
+            if(isEmpty(s_city)){
+                return responsBuilder(0,'Sender City is required.')
+            }
+
+            //post-code
+            if(isEmpty(s_postCode)){
+                return responsBuilder(0,'Sender postcode is required.')
+            }
+
+            //country
+            if(isEmpty(s_country)){
+                return responsBuilder(0,'Sender Country is required.')
+            }
+
+
+        //client
+            //name
+            if(isEmpty(clientName)){
+                return responsBuilder(0,"Client's name is required.")
+            }
+
+            //email
+            if(isEmpty(clientEmail)){
+                return responsBuilder(0,'Client Email is required.')
+            }
+            if(!/.+@.+\..+/.test(clientEmail)){
+                return responsBuilder(0,'Client Email should be in the right format.')
+            }
+
+            //street
+            if(isEmpty(c_street)){
+                return responsBuilder(0,'Client street Address is required.')
+            }
+
+            //city
+            if(isEmpty(c_city)){
+                return responsBuilder(0,'Client City is required.')
+            }
+
+            //post-code
+            if(isEmpty(c_postCode)){
+                return responsBuilder(0,'Client post code is required.')
+            }
+
+            //country
+            if(isEmpty(c_country)){
+                return responsBuilder(0,'Client Country is required.')
+            }
+
+        //other-details
+            //date
+            if(isEmpty(paymentDue)){
+                return responsBuilder(0,'The Invoice Date is required.')
+            }
+
+            //descriptions
+            if(isEmpty(description)){
+                return responsBuilder(0,'Invoice description is required.')
+            }
+
+        //items
+            //item-name
+            if(items.some(item=>isEmpty(item.name))){
+                return responsBuilder(0,'All Items Names are required.')
+            }
+
+            //item-quantity
+            if(items.some(item=>item.quantity === 0)){
+                return responsBuilder(0,'All Items quantity are required.')
+            }
+
+            //item-price
+            if(items.some(item=>item.price === 0)){
+                return responsBuilder(0,'All Items Prices are required.')
+            }
 
 
     //else
     return responsBuilder(1,'Validated Succefully');
+}
+
+export function formatDate(dateString: string): string {
+    const [year, month, day] = dateString.split("-");
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return `${day} ${monthNames[Number(month) - 1]} ${year}`;
 }
