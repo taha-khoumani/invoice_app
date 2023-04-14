@@ -36,10 +36,10 @@ export default function DeleteModul(props:props) {
     >
         <div 
             className={`${styles.deleteWrapper}`} 
-            onClick={onCancelHandler}
+            onClick={(e)=>{onCancelHandler;e.stopPropagation()}}
         >
             <p className={`${styles.title}`} >Confirm Deletion</p>
-            <p className={`${styles.description}`} >Are you sure you want to delete invoice #{props.id}? This action cannot be undone.</p>
+            <p className={`${styles.description}`} >Are you sure you want to delete invoice #{props.id}? <br/> This action cannot be undone.</p>
             <div className={`${styles.buttons}`} >
                     <button 
                         className={`normal_button`} 

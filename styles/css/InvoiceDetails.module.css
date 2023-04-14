@@ -123,6 +123,11 @@
   text-align: end;
 }
 @media (max-width: 600px) {
+  .main .main_top .from_infos p {
+    text-align: start;
+  }
+}
+@media (max-width: 600px) {
   .main .main_top {
     flex-direction: column;
     gap: 30px;
@@ -220,9 +225,21 @@
     gap: 24px;
     border-radius: 8px 8px 0 0;
   }
+  .main .main_bottom .total_details_mobile p {
+    font-weight: bold;
+    font-size: 15px;
+  }
   .main .main_bottom .total_details_mobile > div {
     display: flex;
     justify-content: space-between;
+  }
+  .main .main_bottom .total_details_mobile > div .first_div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .main .main_bottom .total_details_mobile > div div:last-child {
+    margin: auto 0;
   }
 }
 .main .main_bottom .total_div {
@@ -231,4 +248,10 @@
   padding: 27px 32px;
   border-radius: 0 0 8px 8px;
   color: white;
+  align-items: center;
+}
+.main .main_bottom .total_div .grand_total {
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0;
 }

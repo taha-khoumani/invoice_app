@@ -143,6 +143,9 @@ p{
     .auth_feedback{
         background-color: #1E2139;
     }
+    .mobile_black_white{
+        color: white !important;
+    }
 }
 .light{
     color: black;
@@ -222,6 +225,9 @@ p{
         i{
             color: white;
         }
+    }
+    .mobile_black_white{
+        color: black !important;
     }
 }
 

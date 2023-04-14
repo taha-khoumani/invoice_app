@@ -195,25 +195,29 @@ export default function InvoiceDetails(props:props) {
                   </div>
                 </div>
               </div>
-              <div className={`total_details ${styles.total_details_mobile}`}>
-                {
-                  items.map((item,index)=>(
-                    <div key={index}>
-                      <div>
-                        <p>{item.name}</p>
-                        <p>{`${item.quantity} x ${item.price} $`}</p>
-                      </div>
-                      <div>
-                        <p>{item.total}</p>
-                      </div>
+
+              {/* ON MOBILE ONLY */}
+                    <div className={`total_details ${styles.total_details_mobile}`}>
+                      {
+                        items.map((item,index)=>(
+                          <div key={index}>
+                            <div className={`${styles.first_div}`} >
+                              <p className={`mobile_black_white`} >{item.name}</p>
+                              <p>{`${item.quantity} x ${item.price} $`}</p>
+                            </div>
+                            <div>
+                              <p className={`mobile_black_white`} >{item.total} $</p>
+                            </div>
+                          </div>
+                        ))
+                      }
                     </div>
-                  ))
-                }
-              </div>
+              {/*  */}
+              
               {/* total_infos */}
               <div className={`total_div ${styles.total_div}`} >
                 <p>Amount Due</p>
-                <p>{total} $</p>
+                <p className={`${styles.grand_total}`} >{total} $</p>
               </div>
             </div>
           </div>
