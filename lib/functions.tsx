@@ -80,6 +80,9 @@ export function validateInvoiceData(invoiceData:invoice){
         country:c_country
     } = clientAddress
 
+    //Draft case
+    if(status === 'draft') return responsBuilder(1,'Validated Succefully.')
+
     //Validation
         //sender
             //street

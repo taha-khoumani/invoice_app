@@ -7,6 +7,8 @@ import { formatDate, setModaleStyles, validateInvoiceData } from '@/lib/function
 import Item from './components/Item';
 import { nanoid } from 'nanoid';
 import AuthFeedback from '@/components/ui/AuthFeedback';
+import { setAllInvoices } from '@/redux/slices/invoicesSlice';
+import { useSelector } from 'react-redux';
 
 interface props {
     isNewInvoiceOpen:boolean
@@ -42,6 +44,12 @@ export interface invoice {
     },
     items: item[],
     total: number
+}
+
+interface store{
+    invoices:{
+        allInvoices:invoice[]
+    }
 }
 
 export default function NewInvoice(props:props) {
@@ -130,8 +138,7 @@ export default function NewInvoice(props:props) {
         [name]:value
     }))
   }
-  function onSubmitHandler(message:string){
-      console.log(invoiceData)
+  async function onSubmitHandler(message:string){
     //pending
     setAuthFeedbackData({status:'pending',message:message})
     
@@ -140,83 +147,98 @@ export default function NewInvoice(props:props) {
         setTimeout(()=>setAuthFeedbackData(validateInvoiceData(invoiceData)),100)
         return;
     }
+
     //pending
     setAuthFeedbackData({status:'pending',message:message})
 
-    //send data to database
-
-    if(false){
-        setAuthFeedbackData({status:'error',message:'feedback-error-message'})
+    //post data
+    const jsonResult = await fetch('/api/createInvoice',{
+        method: 'POST',
+        body: JSON.stringify ({
+            invoiceData:invoiceData
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    })
+    const result = await jsonResult.json()
+    console.log(jsonResult)
+    if(!jsonResult.ok){
+        setAuthFeedbackData({status:'error',message:result.message})
     }else{
         setAuthFeedbackData({status:'succes',message:'feedback-succes-message'})
+        dispatch(setAllInvoices([...allInvoices,invoiceData]))
+        onCancelHandler()
     }
 
   }
-
 
   //inline-styles
   const borderColor = {
     borderColor:'#9277FF'
   }
 
-  useEffect(()=>{
+    //state
+    const [isPaymentOpen,togglePayment] = useState(false)
+    const [invoiceData,setInvoiceData] = useState({
+      id:`${nanoid().slice(0,6).toUpperCase()}`,
+      createdAt:dateToYMD(new Date()),
+      paymentDue: new Date().toISOString().slice(0, 10),
+      description: "",
+      paymentTerms: 14,
+      clientName: "",
+      clientEmail: "",
+      status: "",
+      senderAddress: {
+        street: "",
+        city: "",
+        postCode: "",
+        country: ""
+      },
+      clientAddress: {
+        street: "",
+        city: "",
+        postCode: "",
+        country: ""
+      },
+      items: [
+          {
+              name: "",
+              quantity: 0,
+              price: 0,
+              total:0
+          }
+      ],
+      total: 0.00
+    })
+    const [authFeedbackData,setAuthFeedbackData] = useState({})
+    const {allInvoices} = useSelector((store:store)=>store.invoices)
 
-    function toggleOff(e:FormEvent){
-        const {parentElement} = e.target as HTMLButtonElement
-        const paymentOptions = paymentOptionsRef.current
-        if(
-            !paymentOptions 
-            || 
-            paymentWrapper.current === parentElement
-            ||
-            paymentWrapper.current === parentElement?.parentElement 
-            ||
-             paymentOptions === parentElement) return;
-        togglePayment(false)
-    }
+    useEffect(()=>{
 
-    // @ts-ignore: Object is possibly 'null'.
-    wrapperRef.current.addEventListener('click',toggleOff)
-
-    // @ts-ignore: Object is possibly 'null'.
-    return ()=>{wrapperRef.current.removeEventListener('click',toggleOff)}
-  },[paymentOptionsRef])
-
-
-  //state
-  const [isPaymentOpen,togglePayment] = useState(false)
-  const [invoiceData,setInvoiceData] = useState({
-    id:`${nanoid().slice(0,6).toUpperCase()}`,
-    createdAt:dateToYMD(new Date()),
-    paymentDue: new Date().toISOString().slice(0, 10),
-    description: "",
-    paymentTerms: 14,
-    clientName: "",
-    clientEmail: "",
-    status: "",
-    senderAddress: {
-      street: "",
-      city: "",
-      postCode: "",
-      country: ""
-    },
-    clientAddress: {
-      street: "",
-      city: "",
-      postCode: "",
-      country: ""
-    },
-    items: [
-        {
-            name: "",
-            quantity: 0,
-            price: 0,
-            total:0
+        function toggleOff(e:FormEvent){
+            const {parentElement} = e.target as HTMLButtonElement
+            const paymentOptions = paymentOptionsRef.current
+            if(
+                !paymentOptions 
+                || 
+                paymentWrapper.current === parentElement
+                ||
+                paymentWrapper.current === parentElement?.parentElement 
+                ||
+                paymentOptions === parentElement) return;
+            togglePayment(false)
         }
-    ],
-    total: 0.00
-  })
-  const [authFeedbackData,setAuthFeedbackData] = useState({})
+
+        // @ts-ignore: Object is possibly 'null'.
+        wrapperRef.current.addEventListener('click',toggleOff)
+
+        // @ts-ignore: Object is possibly 'null'.
+        return ()=>{wrapperRef.current.removeEventListener('click',toggleOff)}
+    },[paymentOptionsRef])
+    useEffect(()=>{
+        if(invoiceData.status !== '') onSubmitHandler(invoiceData.status === 'pending' ? 'Sending Invoice' : 'Saving as Draft')
+    },[invoiceData.status])
 
   return (
     <div 
@@ -322,7 +344,7 @@ export default function NewInvoice(props:props) {
                             type={'date'}
                             customStyles={`${styles.date} date`}
                             name={'paymentDue'}
-                            value={formatDate(invoiceData.paymentDue)}
+                            value={invoiceData.paymentDue}
                             onChange={onChangeHandler}
                         />
                         <div className={`${styles.payment}`} >
@@ -419,9 +441,6 @@ export default function NewInvoice(props:props) {
                                 ...prevData,
                                 status:'draft',
                             }))
-
-                            //submitData
-                            onSubmitHandler('Saving as Draft')
                         }}
                     >
                         Save as Draft
@@ -434,9 +453,6 @@ export default function NewInvoice(props:props) {
                                 ...prevData,
                                 status:'pending',
                             }))
-
-                            //submitData
-                            onSubmitHandler('Sending Invoice')
                         }}
                     >Save & Send</button>
                 </div>

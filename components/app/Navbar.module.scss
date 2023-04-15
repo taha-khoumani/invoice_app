@@ -38,12 +38,23 @@
             width: auto;
             flex-direction: row;
         }
-        &>*{
+        &>*:not(hr){
             // padding-block:24px;
             @include media_tablet(){
                 width: auto;
                 padding-block:auto ;
                 padding:0 24px;
+            }
+        }
+        hr{
+            margin:0;
+            border:none;
+            height: 1px;
+            background-color: #494E6E;
+            width: 100%;
+            @include media_tablet{
+                width: 1px;
+                height: 100%;
             }
         }
         i{

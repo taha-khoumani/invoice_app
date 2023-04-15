@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { ChangeEvent, FormEvent, SyntheticEvent, useEffect, useRef } from 'react'
+import React, { ChangeEvent, FormEvent, SyntheticEvent, useEffect, useRef, useState } from 'react'
 import plus from '../../../public/icon-plus.svg'
 import styles from '@/styles/css/HomeHeader.module.css'
 import { useDispatch } from 'react-redux'
@@ -14,14 +14,19 @@ interface RootStore {
   },
   invoices:{
     allInvoices:object[],
-    filteredOptimizedInvoices:object[]
   }
 }
 
-export default function HomeHeader() {
+interface Props{
+  invoicesLength:number
+}
+
+export default function HomeHeader(props:Props) {
+  const [invoicesLength,setInvoicesLength] = useState(props.invoicesLength)
+
   const dispatch = useDispatch() 
   const {isFilterOn,filter} = useSelector((store:RootStore)=>store.ui)
-  const {filteredOptimizedInvoices} = useSelector((store:RootStore)=>store.invoices)
+  const {allInvoices} = useSelector((store:RootStore)=>store.invoices)
 
   function onToggleFilterHandler(e:FormEvent){
     dispatch(toggleFilter(!isFilterOn))
@@ -36,6 +41,7 @@ export default function HomeHeader() {
   }
 
   
+  //close drop down on body click
   useEffect(()=>{
     function onBodyClickHandler(e:MouseEvent){
       const filterOptions = document.querySelector('.HomeHeader_filter_options__QpPRq')
@@ -44,10 +50,14 @@ export default function HomeHeader() {
       if(!filterOptions || clickedEl === filterOptions) return;
       dispatch(toggleFilter(false))
     }
-
     document.body.addEventListener('click',onBodyClickHandler,)
     return ()=> document.body.removeEventListener('click',onBodyClickHandler)
   },[])
+  
+  //update invoices length on change
+  useEffect(()=>{
+    setInvoicesLength(allInvoices.length)
+  },[allInvoices.length])
 
   function onNewInvoiceHandler(){
     setModaleStyles(true)
@@ -60,7 +70,7 @@ export default function HomeHeader() {
             <h1>Invoices</h1>
             <p>
               <span>There are&nbsp;</span>
-              {filteredOptimizedInvoices.length} 
+              {invoicesLength} 
               <span>&nbsp;total</span> 
               &nbsp;invoices
             </p>
