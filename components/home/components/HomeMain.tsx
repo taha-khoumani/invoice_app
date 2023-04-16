@@ -43,7 +43,8 @@ interface invoice {
   total: number
 }
 interface Props{
-  invoices:invoice[]
+  invoices:invoice[],
+  message:string,
 }
 
 export default function HomeMain(props:Props) {
@@ -74,7 +75,7 @@ export default function HomeMain(props:Props) {
 
   return ( 
     invoices.length === 0 ?
-    <NoInvoices /> :
+    <NoInvoices message={props.message} /> :
     <div className={styles.main} >
       {invoices.map(invoice=><Invoice key={invoice.id} invoiceData={invoice} />)}
     </div>

@@ -43,11 +43,12 @@ interface invoice {
   total: number
 }
 interface Props{
-  invoices:invoice[]
+  invoices:invoice[],
+  message:string,
 }
 
 export default function Home(props:Props) {
-    const {invoices} = props
+    const {invoices,message} = props
     const dispatch = useDispatch()
     useEffect(()=>{
       dispatch(setAllInvoices(invoices))
@@ -59,7 +60,7 @@ export default function Home(props:Props) {
         <div className={styles.home_components_wraper} >
             <NewInvoice isNewInvoiceOpen={isNewInvoiceOpen} />
             <HomeHeader invoicesLength={invoices.length} />
-            <HomeMain invoices={invoices} />
+            <HomeMain message={message} invoices={invoices} />
         </div>
     </div>
   )
