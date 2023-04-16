@@ -9,6 +9,7 @@ import { nanoid } from 'nanoid';
 import AuthFeedback from '@/components/ui/AuthFeedback';
 import { setAllInvoices } from '@/redux/slices/invoicesSlice';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 interface props {
     isNewInvoiceOpen:boolean
@@ -58,6 +59,7 @@ export default function NewInvoice(props:props) {
   if(!isNewInvoiceOpen) return null;
 
   const dispatch = useDispatch()
+  const router = useRouter()
 
   //useRefs
   const refForm = useRef(null)
@@ -138,13 +140,19 @@ export default function NewInvoice(props:props) {
         [name]:value
     }))
   }
-  async function onSubmitHandler(message:string){
+  async function onSubmitHandler(status:string){
+    const message = status === 'pending' ? 'Sending Invoice...' : 'Saving as Draft...'
+    const invoice = {
+        ...invoiceData,
+        status: status,
+    }
+
     //pending
     setAuthFeedbackData({status:'pending',message:message})
     
     //validate-data
-    if(validateInvoiceData(invoiceData).status === 'error'){
-        setTimeout(()=>setAuthFeedbackData(validateInvoiceData(invoiceData)),100)
+    if(validateInvoiceData(invoice).status === 'error'){
+        setTimeout(()=>setAuthFeedbackData(validateInvoiceData(invoice)),100)
         return;
     }
 
@@ -155,19 +163,19 @@ export default function NewInvoice(props:props) {
     const jsonResult = await fetch('/api/createInvoice',{
         method: 'POST',
         body: JSON.stringify ({
-            invoiceData:invoiceData
+            invoiceData:invoice
         }),
         headers: {
           'Content-Type': 'application/json'
         }
     })
     const result = await jsonResult.json()
-    console.log(jsonResult)
     if(!jsonResult.ok){
         setAuthFeedbackData({status:'error',message:result.message})
     }else{
         setAuthFeedbackData({status:'succes',message:'feedback-succes-message'})
-        dispatch(setAllInvoices([...allInvoices,invoiceData]))
+        dispatch(setAllInvoices([...allInvoices,invoice]))
+        router.push(`/${invoice.id}`)
         onCancelHandler()
     }
 
@@ -237,8 +245,11 @@ export default function NewInvoice(props:props) {
         return ()=>{wrapperRef.current.removeEventListener('click',toggleOff)}
     },[paymentOptionsRef])
     useEffect(()=>{
-        if(invoiceData.status !== '') onSubmitHandler(invoiceData.status === 'pending' ? 'Sending Invoice' : 'Saving as Draft')
-    },[invoiceData.status])
+        setInvoiceData(prev=>({
+            ...prev,
+            total:prev.items.reduce((accumulator,currentValue)=>accumulator+currentValue.total,0)
+        }))
+    },[invoiceData.items])
 
   return (
     <div 
@@ -435,25 +446,13 @@ export default function NewInvoice(props:props) {
                     </button>
                     <button 
                         className={`${styles.save}`} 
-                        onClick={()=>{
-                            //set-status
-                            setInvoiceData(prevData=>({
-                                ...prevData,
-                                status:'draft',
-                            }))
-                        }}
+                        onClick={()=>onSubmitHandler('draft')}
                     >
                         Save as Draft
                     </button>
                     <button 
                         className={`purple_button`} 
-                        onClick={()=>{
-                            //set-status
-                            setInvoiceData(prevData=>({
-                                ...prevData,
-                                status:'pending',
-                            }))
-                        }}
+                        onClick={()=>onSubmitHandler('pending')}
                     >Save & Send</button>
                 </div>
             </div>

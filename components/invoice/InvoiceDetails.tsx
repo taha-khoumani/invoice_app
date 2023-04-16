@@ -1,9 +1,11 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '@/styles/css/InvoiceDetails.module.css'
 import { useDispatch } from 'react-redux'
 import { toggleDeleteModule, toggleEditInvoice } from '@/redux/slices/uiSlice'
 import { formatDate, setModaleStyles } from '@/lib/functions'
+import { useSelector } from 'react-redux'
+import { setCurrentInvoice } from '@/redux/slices/invoicesSlice'
 
 interface props {
   desiredInvoice:{
@@ -36,8 +38,44 @@ interface props {
     total: number
   }
 }
+interface item {
+  name: string,
+  quantity: number,
+  price: number,
+  total: number
+}
+interface invoice {
+  id:string,
+  createdAt:string,
+  paymentDue:string,
+  description:string,
+  paymentTerms: number,
+  clientName:string,
+  clientEmail:string,
+  status:string,
+  senderAddress: {
+    street:string,
+    city:string,
+    postCode:string,
+    country:string
+  },
+  clientAddress: {
+    street:string,
+    city:string,
+    postCode:string,
+    country:string
+  },
+  items: item[],
+  total: number
+}
+interface store{
+  invoices:{
+    currentInvoice:invoice,
+  }
+}
 
 export default function InvoiceDetails(props:props) {
+  const [invoice,setInvoice] = useState(props.desiredInvoice)
   const {
     id,
     description,
@@ -51,9 +89,13 @@ export default function InvoiceDetails(props:props) {
     clientAddress,
     items,
     total,
-  } = props.desiredInvoice
+  } = invoice
   const dispatch = useDispatch()
+  const {currentInvoice} = useSelector((store:store)=>store.invoices)
 
+  useEffect(()=>{
+    setInvoice(currentInvoice)
+  },[currentInvoice])
 
   function firstToCapital(status:string):string{
     return status[0].toUpperCase()+status.slice(1)
@@ -79,7 +121,28 @@ export default function InvoiceDetails(props:props) {
       >
         Delete
       </button>
-      <button className='purple_button' >Mark as Paid</button>
+      <button 
+        className='purple_button' 
+        onClick={async()=>{
+          if(invoice.status === 'paid') return;
+          const paidInvoice = {
+            ...invoice,
+            status:'paid'
+          }
+          const jsonResult = await fetch('/api/editInvoice',{
+            method: 'PATCH',
+            body: JSON.stringify ({
+                invoiceData:paidInvoice
+            }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          dispatch(setCurrentInvoice(paidInvoice))
+        }}
+      >
+        Mark as Paid
+      </button>
     </div>
   )
   

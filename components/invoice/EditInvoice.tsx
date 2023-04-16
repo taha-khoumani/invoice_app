@@ -1,13 +1,13 @@
-import React, { DOMElement, FormEvent, useEffect, useRef, useState } from 'react'
+import React, {FormEvent, useEffect, useRef, useState } from 'react'
 import styles from '@/styles/css/NewInvoice.module.css'
 import { useDispatch } from 'react-redux';
-import { toggleEditInvoice, toggleNewInvoice } from '@/redux/slices/uiSlice';
+import { toggleEditInvoice } from '@/redux/slices/uiSlice';
 import Input from '../home/components/components/Input';
 import { setModaleStyles, validateInvoiceData } from '@/lib/functions';
 import Item from '../home/components/components/Item';
-import { nanoid } from 'nanoid';
 import AuthFeedback from '@/components/ui/AuthFeedback';
 import { useSelector } from 'react-redux';
+import { setCurrentInvoice } from '@/redux/slices/invoicesSlice';
 
 interface item {
     name: string,
@@ -15,8 +15,7 @@ interface item {
     price: number,
     total: number
 }
-
-export interface invoice {
+interface invoice {
     id:string,
     createdAt:string,
     paymentDue:string,
@@ -40,11 +39,9 @@ export interface invoice {
     items: item[],
     total: number
 }
-
 interface props {
     desiredInvoice:invoice,
 }
-
 interface store{
     ui:{
       isEditInvoiceOpen:boolean
@@ -87,11 +84,17 @@ export default function EditInvoice(props:props) {
         // @ts-ignore: Object is possibly 'null'.
         if(wrapperRef.current) return ()=>{wrapperRef!.current!.removeEventListener('click',toggleOff)}
     },[paymentOptionsRef])
+    useEffect(()=>{
+        setInvoiceData(prev=>({
+            ...prev,
+            total:prev.items.reduce((accumulator,currentValue)=>accumulator+currentValue.total,0)
+        }))
+    },[invoiceData.items])
+
+    const dispatch = useDispatch()
 
     //if not open
     if(!isEditInvoiceOpen) return null;
-
-  const dispatch = useDispatch()
 
   //helper-function
   function dateToYMD(date:Date) {
@@ -165,24 +168,49 @@ export default function EditInvoice(props:props) {
         [name]:value
     }))
   }
-  function onSubmitHandler(){
+  async function onSubmitHandler(status:string){
+    const message = status === 'pending' ? 'Sending Invoice...' : 'Saving as Draft...'
+    const invoice = {
+        ...invoiceData,
+        status: status,
+    }
+
     //pending
-    setAuthFeedbackData({status:'pending',message:'Saving Changes'})
+    setAuthFeedbackData({status:'pending',message:message})
     
     //validate-data
-    if(validateInvoiceData(invoiceData).status === 'error'){
-        setTimeout(()=>setAuthFeedbackData(validateInvoiceData(invoiceData)),100)
+    if(validateInvoiceData(invoice).status === 'error'){
+        setTimeout(()=>setAuthFeedbackData(validateInvoiceData(invoice)),100)
+        setInvoiceData(prevData=>({
+            ...prevData,
+            status:'',
+        }))
         return;
     }
     //pending
-    setAuthFeedbackData({status:'pending',message:'Saving Changes'})
+    setAuthFeedbackData({status:'pending',message:message})
 
-    //send data to database
-
-    if(false){
-        setAuthFeedbackData({status:'error',message:'feedback-error-message'})
+    //post data
+    const jsonResult = await fetch('/api/editInvoice',{
+        method: 'PATCH',
+        body: JSON.stringify ({
+            invoiceData:invoice
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    })
+    const result = await jsonResult.json()
+    if(!jsonResult.ok){
+        setAuthFeedbackData({status:'error',message:result.message})
+        setInvoiceData(prevData=>({
+            ...prevData,
+            status:'',
+        }))
     }else{
         setAuthFeedbackData({status:'succes',message:'feedback-succes-message'})
+        dispatch(setCurrentInvoice(invoice))
+        onCancelHandler()
     }
 
   }
@@ -380,17 +408,23 @@ export default function EditInvoice(props:props) {
                 </div>
                 <div ref={refButtons} style={{gap:'10px'}} className={`${styles.buttons} buttons`} >
                     <button 
-                        className={`${styles.save}`} 
-                        style={{marginLeft:'auto'}}
+                        className={`${styles.reverse_normal_button}`} 
                         onClick={onCancelHandler}
                     >
-                        Cancel
+                        Discard
+                    </button>
+                    <button 
+                        className={`${styles.save}`} 
+                        onClick={()=>onSubmitHandler('draft')}
+                    >
+                        Save as Draft
                     </button>
                     <button 
                         className={`purple_button`} 
-                        onClick={onSubmitHandler}
-                        style={{marginRight:'10px'}}
-                    >Save Changes</button>
+                        onClick={()=>onSubmitHandler('pending')}
+                    >
+                        Save & Send
+                    </button>
                 </div>
             </div>
         </div>

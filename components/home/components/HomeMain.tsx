@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import styles from '@/styles/css/HomeMain.module.css'
 import { useSelector } from 'react-redux'
 import Invoice from './components/Invoice'
-import { useDispatch } from 'react-redux'
-import { setFilteredOptimizedInvoices } from '@/redux/slices/invoicesSlice'
 import NoInvoices from './components/NoInvoices'
 
 interface RootStore {
