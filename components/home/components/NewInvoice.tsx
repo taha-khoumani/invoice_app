@@ -10,6 +10,7 @@ import AuthFeedback from '@/components/ui/AuthFeedback';
 import { setAllInvoices } from '@/redux/slices/invoicesSlice';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
 interface props {
     isNewInvoiceOpen:boolean
@@ -22,7 +23,7 @@ interface item {
     total: number
 }
 
-export interface invoice {
+interface invoice {
     id:string,
     createdAt:string,
     paymentDue:string,
@@ -60,6 +61,7 @@ export default function NewInvoice(props:props) {
 
   const dispatch = useDispatch()
   const router = useRouter()
+  const {data,status} = useSession()
 
   //useRefs
   const refForm = useRef(null)
@@ -163,7 +165,8 @@ export default function NewInvoice(props:props) {
     const jsonResult = await fetch('/api/createInvoice',{
         method: 'POST',
         body: JSON.stringify ({
-            invoiceData:invoice
+            invoiceData:invoice,
+            userEmail:data?.user?.email
         }),
         headers: {
           'Content-Type': 'application/json'
@@ -175,6 +178,7 @@ export default function NewInvoice(props:props) {
     }else{
         setAuthFeedbackData({status:'succes',message:'feedback-succes-message'})
         dispatch(setAllInvoices([...allInvoices,invoice]))
+        setAuthFeedbackData({})
         router.push(`/${invoice.id}`)
         onCancelHandler()
     }

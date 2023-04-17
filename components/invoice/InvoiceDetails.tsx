@@ -5,7 +5,8 @@ import { useDispatch } from 'react-redux'
 import { toggleDeleteModule, toggleEditInvoice } from '@/redux/slices/uiSlice'
 import { formatDate, setModaleStyles } from '@/lib/functions'
 import { useSelector } from 'react-redux'
-import { setCurrentInvoice } from '@/redux/slices/invoicesSlice'
+import { setCurrentInvoice, setRunEditOnLoad } from '@/redux/slices/invoicesSlice'
+import { useSession } from 'next-auth/react'
 
 interface props {
   desiredInvoice:{
@@ -92,6 +93,7 @@ export default function InvoiceDetails(props:props) {
   } = invoice
   const dispatch = useDispatch()
   const {currentInvoice} = useSelector((store:store)=>store.invoices)
+  const {data} = useSession()
 
   useEffect(()=>{
     setInvoice(currentInvoice)
@@ -125,20 +127,27 @@ export default function InvoiceDetails(props:props) {
         className='purple_button' 
         onClick={async()=>{
           if(invoice.status === 'paid') return;
-          const paidInvoice = {
-            ...invoice,
-            status:'paid'
+          if(invoice.status === 'draft'){
+            dispatch(toggleEditInvoice(true))
+            dispatch(setRunEditOnLoad(true))
           }
-          const jsonResult = await fetch('/api/editInvoice',{
-            method: 'PATCH',
-            body: JSON.stringify ({
-                invoiceData:paidInvoice
-            }),
-            headers: {
-              'Content-Type': 'application/json'
+          if(invoice.status === 'pending'){
+            const paidInvoice = {
+              ...invoice,
+              status:'paid'
             }
-          })
-          dispatch(setCurrentInvoice(paidInvoice))
+            const jsonResult = await fetch('/api/editInvoice',{
+              method: 'PATCH',
+              body: JSON.stringify ({
+                  invoiceData:paidInvoice,
+                  userEmail:data?.user?.email
+              }),
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            dispatch(setCurrentInvoice(paidInvoice))
+          }
         }}
       >
         Mark as Paid

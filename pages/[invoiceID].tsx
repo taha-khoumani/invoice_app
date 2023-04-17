@@ -7,6 +7,9 @@ import { MongoClient } from "mongodb";
 import { Context } from 'vm'
 import { useDispatch } from 'react-redux'
 import { setCurrentInvoice } from '@/redux/slices/invoicesSlice'
+import { getServerSession } from 'next-auth'
+import { authOptions } from './api/auth/[...nextauth]'
+import {invoice} from '@/lib/types'
 
 interface Props{
   stringInvoice:string
@@ -35,14 +38,28 @@ export default function invoiceID(props:Props) {
   )
 }
 
-export async function getServerSideProps({params}:Context) {
-  const client = await MongoClient.connect(`mongodb+srv://tagopi:${'DGakye2AgwDd8v2a'}@cluster0.8kpmakb.mongodb.net/?retryWrites=true&w=majority`)
-  const invoices = client.db('invoice').collection("invoices")
-  const result = await invoices.findOne({id:params.invoiceID})
+export async function getServerSideProps({params,req,res}:Context) {
+  const session = await getServerSession(req, res, authOptions)
 
-  return {
-    props: {
-      stringInvoice:JSON.stringify(result)
-    },
+  if(!session || !session.user){
+    return {
+      props: {},
+      redirect:{
+        permanent:false,
+        destination:'/'
+      }
+    }
+  }else{
+    const {email} = session.user
+    const client = await MongoClient.connect(`mongodb+srv://tagopi:${'DGakye2AgwDd8v2a'}@cluster0.8kpmakb.mongodb.net/?retryWrites=true&w=majority`)
+    const users = client.db('invoice').collection("users")
+    const result = await users.findOne({'userData.email':email})
+    const wantedInvoice = result?.invoices.find((invoice:invoice)=>invoice.id === params.invoiceID)
+
+    return {
+      props: {
+        stringInvoice:JSON.stringify(wantedInvoice),
+      },
+    }
   }
 }

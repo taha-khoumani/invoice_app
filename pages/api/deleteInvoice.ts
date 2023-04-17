@@ -8,10 +8,12 @@ import { validateInvoiceData } from "@/lib/functions";
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { getServerSession } from "next-auth/next"
 import { NextApiRequest, NextApiResponse } from "next";
+import { invoice } from "@/lib/types";
 
 interface ExtendedNextApiRequest extends NextApiRequest {
     body: {
-        invoiceID:any
+        invoiceID:string,
+        userEmail:string,
     };
 }
 
@@ -30,13 +32,19 @@ export default async function handler (req:ExtendedNextApiRequest,res:NextApiRes
         //     return null;
         // }
     
-        const {invoiceID} = req.body
+        const {invoiceID,userEmail} = req.body
         
         const client = await MongoClient.connect(`mongodb+srv://tagopi:${'DGakye2AgwDd8v2a'}@cluster0.8kpmakb.mongodb.net/?retryWrites=true&w=majority`)
-        const invoices = client.db('invoice').collection("invoices")
+        const users = client.db('invoice').collection("users")
+
+        //find-document
+        const findResult = await users.findOne({'userData.email':userEmail})
+        const oldInvoices = findResult?.invoices
+        const newInvoice = oldInvoices.filter((invoice:invoice)=> invoice.id !== invoiceID)
 
         //insert the data
-        const result = await invoices.deleteOne({id:invoiceID})
+        const addResult = await users.updateOne({'userData.email':userEmail},{$set:{'invoices':newInvoice}})
+
         res.status(200).json({status:200,message:'Invoice edited succesefully'})
         client.close()
 

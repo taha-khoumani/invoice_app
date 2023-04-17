@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     allInvoices:[],
     currentInvoice:null,
-    // filteredOptimizedInvoices
+    runEditOnLoad:false,
 }
 
 const invoicesSlice = createSlice({
@@ -16,11 +16,11 @@ const invoicesSlice = createSlice({
         setCurrentInvoice:(state,{payload})=>{
             state.currentInvoice = payload
         },
-        // setFilteredOptimizedInvoices:(state,{payload})=>{
-        //     state.filteredOptimizedInvoices = payload
-        // },
+        setRunEditOnLoad:(state,{payload})=>{
+            state.runEditOnLoad = payload
+        },
     }
 })
 
 export default invoicesSlice.reducer
-export const {setAllInvoices,setCurrentInvoice} = invoicesSlice.actions
+export const {setAllInvoices,setCurrentInvoice,setRunEditOnLoad} = invoicesSlice.actions

@@ -7,7 +7,8 @@ import { setModaleStyles, validateInvoiceData } from '@/lib/functions';
 import Item from '../home/components/components/Item';
 import AuthFeedback from '@/components/ui/AuthFeedback';
 import { useSelector } from 'react-redux';
-import { setCurrentInvoice } from '@/redux/slices/invoicesSlice';
+import { setCurrentInvoice, setRunEditOnLoad } from '@/redux/slices/invoicesSlice';
+import { useSession } from 'next-auth/react';
 
 interface item {
     name: string,
@@ -45,6 +46,9 @@ interface props {
 interface store{
     ui:{
       isEditInvoiceOpen:boolean
+    },
+    invoices:{
+        runEditOnLoad:boolean,
     }
 }
 
@@ -52,9 +56,11 @@ export default function EditInvoice(props:props) {
     //state
     const {desiredInvoice} = props
     const {isEditInvoiceOpen} = useSelector((store:store)=>store.ui)
+    const {runEditOnLoad} = useSelector((store:store)=>store.invoices)
     const [isPaymentOpen,togglePayment] = useState(false)
     const [invoiceData,setInvoiceData] = useState(desiredInvoice)
     const [authFeedbackData,setAuthFeedbackData] = useState({})
+    const {data,status} = useSession()
 
     //useRefs
     const refForm = useRef(null)
@@ -90,6 +96,11 @@ export default function EditInvoice(props:props) {
             total:prev.items.reduce((accumulator,currentValue)=>accumulator+currentValue.total,0)
         }))
     },[invoiceData.items])
+    useEffect(()=>{
+        if(runEditOnLoad){
+            onSubmitHandler('pending')
+        }
+    },[runEditOnLoad])
 
     const dispatch = useDispatch()
 
@@ -115,6 +126,8 @@ export default function EditInvoice(props:props) {
     refButtons.current.style.boxShadow = null;
   }
   function onCancelHandler(){
+    setAuthFeedbackData({})
+    dispatch(setRunEditOnLoad(false))
     setModaleStyles(false)
     dispatch(toggleEditInvoice(false))
   }
@@ -194,7 +207,8 @@ export default function EditInvoice(props:props) {
     const jsonResult = await fetch('/api/editInvoice',{
         method: 'PATCH',
         body: JSON.stringify ({
-            invoiceData:invoice
+            invoiceData:invoice,
+            userEmail:data?.user?.email
         }),
         headers: {
           'Content-Type': 'application/json'

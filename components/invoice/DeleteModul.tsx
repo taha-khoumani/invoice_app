@@ -6,6 +6,7 @@ import { setModaleStyles } from '@/lib/functions'
 import { useDispatch } from 'react-redux'
 import { toggleDeleteModule } from '@/redux/slices/uiSlice'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 
 interface props{
     id:string
@@ -21,6 +22,7 @@ export default function DeleteModul(props:props) {
     const {id} = props
     const {isDeleteModuleOpen} = useSelector((store:store)=>store.ui)
     const dispatch = useDispatch()
+    const {data,status} = useSession()
     const router = useRouter()
 
     if(!isDeleteModuleOpen) return null;
@@ -35,7 +37,8 @@ export default function DeleteModul(props:props) {
         const jsonResult = await fetch('/api/deleteInvoice',{
             method: 'DELETE',
             body: JSON.stringify ({
-                invoiceID:id
+                invoiceID:id,
+                userEmail:data?.user?.email
             }),
             headers: {
               'Content-Type': 'application/json'
