@@ -26,16 +26,23 @@ export default async function handler (req:ExtendedNextApiRequest,res:NextApiRes
         }
     
         //auth validation
-        // const session = await getServerSession(req, res, authOptions)
-        // if(!session){
-        //     res.status(405).json({status:405,message:"You have to Sign In before posting an invoice."})
-        //     return null;
-        // }
+        const session = await getServerSession(req, res, authOptions)
+        if(!session){
+            res.status(405).json({status:405,message:"You have to Sign In before posting an invoice."})
+            return null;
+        }
     
         const {invoiceID,userEmail} = req.body
         
         const client = await MongoClient.connect(`mongodb+srv://tagopi:${'DGakye2AgwDd8v2a'}@cluster0.8kpmakb.mongodb.net/?retryWrites=true&w=majority`)
         const users = client.db('invoice').collection("users")
+
+        //if user owns the invoice that they want to delete
+        const userOwnsInvoice = await users.findOne({'userData.email':userEmail,'invoices.id':invoiceID})
+        if(!userOwnsInvoice){
+            res.status(405).json({status:405,message:"You don't own this invoice."})
+            return null;
+        }
 
         //find-document
         const findResult = await users.findOne({'userData.email':userEmail})

@@ -65,7 +65,6 @@ export default function Navbar() {
                     }
                 })
                 const result =  await jsonResult.json()
-                console.log(result.message)
             }
         })()
     },[status])

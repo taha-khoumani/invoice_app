@@ -28,19 +28,27 @@ export default async function handler (req:ExtendedNextApiRequest,res:NextApiRes
         }
     
         //auth validation
-        // const session = await getServerSession(req, res, authOptions)
-        // if(!session){
-        //     res.status(405).json({status:405,message:"You have to Sign In before posting an invoice."})
-        //     return null;
-        // }
+        const session = await getServerSession(req, res, authOptions)
+        if(!session || !session.user ){
+            res.status(405).json({status:405,message:"You have to get authentificated before registering a user."})
+            return null;
+        } 
     
         const {userData} = req.body
         
+        //connect to db
         const client = await MongoClient.connect(`mongodb+srv://tagopi:${'DGakye2AgwDd8v2a'}@cluster0.8kpmakb.mongodb.net/?retryWrites=true&w=majority`)
-        const invoices = client.db('invoice').collection("users")
+        const users = client.db('invoice').collection("users")
+
+        //is user already signed in
+        const userIsAlreadyRegistered = await users.findOne({'userData.email':session.user.email})
+        if(userIsAlreadyRegistered){
+            res.status(405).json({status:405,message:"You are already signed in."})
+            return null;
+        }
     
         // insert the data
-        const result = await invoices.insertOne({
+        const result = await users.insertOne({
             userData:userData,
             invoices:[],
         })

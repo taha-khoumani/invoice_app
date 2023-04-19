@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux'
 import { toggleDeleteModule } from '@/redux/slices/uiSlice'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
+import { setAllInvoices } from '@/redux/slices/invoicesSlice'
+import { invoice } from '@/lib/types'
 
 interface props{
     id:string
@@ -15,12 +17,16 @@ interface props{
 interface store{
     ui:{
         isDeleteModuleOpen:boolean
+    },
+    invoices:{
+        allInvoices:invoice[]
     }
 }
 
 export default function DeleteModul(props:props) {
     const {id} = props
     const {isDeleteModuleOpen} = useSelector((store:store)=>store.ui)
+    const {allInvoices} = useSelector((store:store)=>store.invoices)
     const dispatch = useDispatch()
     const {data,status} = useSession()
     const router = useRouter()
@@ -45,6 +51,7 @@ export default function DeleteModul(props:props) {
             }
         })
         const result = await jsonResult.json()
+        dispatch(setAllInvoices(allInvoices.filter(invoice=>invoice.id !== id)))
     }
 
   return (

@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { toggleFilter ,setFilter, toggleNewInvoice} from '@/redux/slices/uiSlice'
 import { setModaleStyles } from '@/lib/functions'
+import { useSession } from 'next-auth/react'
 
 interface RootStore {
   ui:{
@@ -27,6 +28,7 @@ export default function HomeHeader(props:Props) {
   const dispatch = useDispatch() 
   const {isFilterOn,filter} = useSelector((store:RootStore)=>store.ui)
   const {allInvoices} = useSelector((store:RootStore)=>store.invoices)
+  const {data,status} = useSession()
 
   function onToggleFilterHandler(e:FormEvent){
     dispatch(toggleFilter(!isFilterOn))
@@ -60,8 +62,12 @@ export default function HomeHeader(props:Props) {
   },[allInvoices.length])
 
   function onNewInvoiceHandler(){
-    setModaleStyles(true)
-    dispatch(toggleNewInvoice(true))
+    if(status === 'authenticated'){
+      setModaleStyles(true)
+      dispatch(toggleNewInvoice(true))
+    }else if(status === 'unauthenticated'){
+      alert('you have to sign in')
+    }
   }
 
   return (

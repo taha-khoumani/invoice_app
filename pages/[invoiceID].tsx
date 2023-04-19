@@ -16,6 +16,7 @@ interface Props{
 }
 
 export default function invoiceID(props:Props) {
+  if(!props.stringInvoice) return;
   const invoice = JSON.parse(props.stringInvoice)
   const dispatch = useDispatch()
 
@@ -40,8 +41,14 @@ export default function invoiceID(props:Props) {
 
 export async function getServerSideProps({params,req,res}:Context) {
   const session = await getServerSession(req, res, authOptions)
+  const currentInvoiceID = params.invoiceID
 
-  if(!session || !session.user){
+  //database
+  const client = await MongoClient.connect(`mongodb+srv://tagopi:${'DGakye2AgwDd8v2a'}@cluster0.8kpmakb.mongodb.net/?retryWrites=true&w=majority`)
+  const users = client.db('invoice').collection("users")
+  const currentUserOwnWantedInvoice = await users.findOne({'invoices.id':currentInvoiceID,'userData.email':session?.user?.email})
+
+  if(!session || !session.user || !session.user.email ){
     return {
       props: {},
       redirect:{
@@ -49,12 +56,19 @@ export async function getServerSideProps({params,req,res}:Context) {
         destination:'/'
       }
     }
-  }else{
-    const {email} = session.user
-    const client = await MongoClient.connect(`mongodb+srv://tagopi:${'DGakye2AgwDd8v2a'}@cluster0.8kpmakb.mongodb.net/?retryWrites=true&w=majority`)
-    const users = client.db('invoice').collection("users")
+  } else if(!currentUserOwnWantedInvoice){
+    return {
+      props: {},
+      redirect:{
+        permanent:false,
+        destination:'/'
+      }
+    }
+  } else{
+  const {email} = session.user
+
     const result = await users.findOne({'userData.email':email})
-    const wantedInvoice = result?.invoices.find((invoice:invoice)=>invoice.id === params.invoiceID)
+    const wantedInvoice = result?.invoices.find((invoice:invoice)=>invoice.id === currentInvoiceID)
 
     return {
       props: {
