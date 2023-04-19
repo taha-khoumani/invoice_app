@@ -56,7 +56,6 @@ export default function Home(props:Props) {
       dispatch(setAllInvoices(invoices))
     },[])
     const {isNewInvoiceOpen,isNotSignedInModuleOpen} = useSelector((store:store)=>store.ui)
-    console.log(isNotSignedInModuleOpen)
   return (
     <div className={styles.home} >
         <div className={styles.home_components_wraper} >

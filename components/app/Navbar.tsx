@@ -76,7 +76,7 @@ export default function Navbar() {
             src={navbar_logo} 
             alt={'navbar_logo'} 
             className={styles.navbar_logo}  
-            onClick={sendAll}
+            // onClick={sendAll}
         />
         <div className={styles.navbar_theme__profile} >
             <div className={styles.auth_icon}>
@@ -105,9 +105,9 @@ export default function Navbar() {
                         alt='s'
                         width={40}
                         height={40}
-                        onClick={()=>{
-                            console.log(data) 
-                        }}
+                        // onClick={()=>{
+                        //     console.log(data) 
+                        // }}
                     />
                 </div>
             }
