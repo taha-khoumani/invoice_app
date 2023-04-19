@@ -7,10 +7,12 @@ import { setAllInvoices } from '@/redux/slices/invoicesSlice'
 import NewInvoice from './components/NewInvoice'
 import { useSelector } from 'react-redux'
 import data from '@/data.json'
+import NotSignedIn from './components/NotSignedIn'
 
 interface store{
   ui:{
-    isNewInvoiceOpen:boolean
+    isNewInvoiceOpen:boolean,
+    isNotSignedInModuleOpen:boolean,
   }
 }
 interface invoice {
@@ -53,12 +55,13 @@ export default function Home(props:Props) {
     useEffect(()=>{
       dispatch(setAllInvoices(invoices))
     },[])
-    const {isNewInvoiceOpen} = useSelector((store:store)=>store.ui)
-
+    const {isNewInvoiceOpen,isNotSignedInModuleOpen} = useSelector((store:store)=>store.ui)
+    console.log(isNotSignedInModuleOpen)
   return (
     <div className={styles.home} >
         <div className={styles.home_components_wraper} >
             <NewInvoice isNewInvoiceOpen={isNewInvoiceOpen} />
+            <NotSignedIn isNotSignedInModuleOpen={isNotSignedInModuleOpen} />
             <HomeHeader invoicesLength={invoices.length} />
             <HomeMain message={message} invoices={invoices} />
         </div>

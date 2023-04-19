@@ -4,7 +4,7 @@ import plus from '../../../public/icon-plus.svg'
 import styles from '@/styles/css/HomeHeader.module.css'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { toggleFilter ,setFilter, toggleNewInvoice} from '@/redux/slices/uiSlice'
+import { toggleFilter ,setFilter, toggleNewInvoice, toggleNotSignedInModule} from '@/redux/slices/uiSlice'
 import { setModaleStyles } from '@/lib/functions'
 import { useSession } from 'next-auth/react'
 
@@ -66,7 +66,7 @@ export default function HomeHeader(props:Props) {
       setModaleStyles(true)
       dispatch(toggleNewInvoice(true))
     }else if(status === 'unauthenticated'){
-      alert('you have to sign in')
+      dispatch(toggleNotSignedInModule(true))
     }
   }
 
