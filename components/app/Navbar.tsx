@@ -93,21 +93,24 @@ export default function Navbar() {
                 onClick={handleToggleTheme}
             >
             </i>
-            <div className={styles.profile}>
-                <Image 
-                    src={
-                        status === 'authenticated' && data.user && data.user.image ?
-                        data.user.image :
-                        '/image-avatar.jpg'
-                    }
-                    alt='s'
-                    width={40}
-                    height={40}
-                    onClick={()=>{
-                        console.log(data)
-                    }}
-                />
-            </div>
+            {
+                status === 'authenticated' &&
+                <div className={styles.profile}>
+                    <Image 
+                        src={
+                            status === 'authenticated' && data.user && data.user.image ?
+                            data.user.image :
+                            '/image-avatar.jpg'
+                        }
+                        alt='s'
+                        width={40}
+                        height={40}
+                        onClick={()=>{
+                            console.log(data)
+                        }}
+                    />
+                </div>
+            }
         </div>
     </div>
   )
