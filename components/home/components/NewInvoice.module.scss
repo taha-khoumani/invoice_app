@@ -28,10 +28,12 @@
 
 .write_invoice_second_half_wrapper{
     position: relative;
+    height: 100%;
 }
 
 .buttons{
-    position: relative;
+    position: absolute;
+    inset: auto 0 0 0;
     padding:20px 56px 32px;
     display: flex;
     gap:8px;
@@ -62,26 +64,27 @@
     flex-direction: column;
     overflow-y: scroll;
     gap:40px;
-    padding: 55px 56px 32px;
+    padding: 55px 56px 120px;
     width: 616px;
     box-sizing:border-box;
     flex: 100%;
-    max-height:calc( 100vh - 99px);
+    // max-height:calc( 100vh - 99px);
+    max-height: 100%;
     
     @include media_tablet{
-        max-height:calc( 100vh - 179px);
+        // padding-bottom: 0px;
     }
 
     @include media_mobile{
-        max-height:calc( 100vh - 170px);
-        padding: 30px 24px;
+        // max-height:calc( 100vh - 170px);
+        padding: 30px 24px 120px;
         margin:0 auto;
     }
     @include media(635px){
         width: auto;
     }
     @include media(500px){
-        max-height:calc( 100vh - 168px);
+        // max-height:calc( 100vh - 168px);
     }
     input{
         background-color: transparent

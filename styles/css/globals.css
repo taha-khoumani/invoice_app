@@ -138,6 +138,7 @@ p {
 }
 .dark .buttons {
   box-shadow: 0px -15px 80px 0px rgba(0, 0, 0, 0.8);
+  background-color: #141625;
 }
 .dark .date input::-webkit-calendar-picker-indicator {
   filter: invert(100%);
@@ -220,6 +221,7 @@ p {
 }
 .light .buttons {
   box-shadow: 0px -2px 80px 0px rgba(0, 0, 0, 0.2);
+  background-color: white;
 }
 .light .auth_feedback {
   background-color: white;
