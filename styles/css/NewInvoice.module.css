@@ -61,28 +61,44 @@
 }
 
 .write_invoice_third_wrapper {
+  max-height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 120px;
+}
+.write_invoice_third_wrapper > div {
+  overflow-y: scroll;
+  max-height: 80vh;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   gap: 40px;
-  padding: 55px 56px 120px;
+  padding: 55px 56px 0px;
   width: 616px;
-  box-sizing: border-box;
   flex: 100%;
-  max-height: 100%;
+  max-height: calc(100vh - 99px);
+}
+@media (max-width: 1023px) {
+  .write_invoice_third_wrapper > div {
+    max-height: calc(100vh - 179px);
+  }
 }
 @media (max-width: 767px) {
-  .write_invoice_third_wrapper {
-    padding: 30px 24px 120px;
+  .write_invoice_third_wrapper > div {
+    padding: 30px 24px;
     margin: 0 auto;
   }
 }
 @media (max-width: 635px) {
-  .write_invoice_third_wrapper {
+  .write_invoice_third_wrapper > div {
     width: auto;
   }
 }
-.write_invoice_third_wrapper input {
+@media (max-width: 500px) {
+  .write_invoice_third_wrapper > div {
+    max-height: calc(100vh - 168px);
+  }
+}
+.write_invoice_third_wrapper > div input {
   background-color: transparent;
 }
 

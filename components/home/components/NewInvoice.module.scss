@@ -60,35 +60,47 @@
 }
 
 .write_invoice_third_wrapper{
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    gap:40px;
-    padding: 55px 56px 120px;
-    width: 616px;
-    box-sizing:border-box;
-    flex: 100%;
-    // max-height:calc( 100vh - 99px);
     max-height: 100%;
+    box-sizing:border-box;
+    padding-bottom: 120px;
     
-    @include media_tablet{
-        // padding-bottom: 0px;
+    &>div{
+        overflow-y: scroll;
+        max-height: 80vh;
+        box-sizing:border-box;
+        display: flex;
+        flex-direction: column;
+        gap:40px;
+        padding: 55px 56px 0px;
+        width: 616px;
+        flex: 100%;
+
+        max-height:calc( 100vh - 99px);
+
+        @include media_tablet{
+            max-height:calc( 100vh - 179px);
+        }
+        
+        @include media_mobile{
+            padding: 30px 24px;
+            margin:0 auto;
+
+            // max-height:calc( 100vh - 170px);
+        }
+        @include media(635px){
+            width: auto;
+        }
+
+        @include media(500px){
+            max-height:calc( 100vh - 168px);
+        }
+        
+
+        input{
+            background-color: transparent
+        }
     }
 
-    @include media_mobile{
-        // max-height:calc( 100vh - 170px);
-        padding: 30px 24px 120px;
-        margin:0 auto;
-    }
-    @include media(635px){
-        width: auto;
-    }
-    @include media(500px){
-        // max-height:calc( 100vh - 168px);
-    }
-    input{
-        background-color: transparent
-    }
 }
 
 
