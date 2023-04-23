@@ -34,8 +34,8 @@
 .buttons{
     position: absolute;
     inset: auto 0 0 0;
-    padding:20px 56px 32px;
     display: flex;
+    padding:20px 56px 32px;
     gap:8px;
     
     button{
@@ -60,13 +60,18 @@
 }
 
 .write_invoice_third_wrapper{
-    max-height: 100%;
+    height: calc(100% - 99px);
     box-sizing:border-box;
-    padding-bottom: 120px;
+    overflow-y: scroll;
+    
+    @include media(500px){
+        height: calc(100% - 88px);
+    }
+
+
     
     &>div{
-        overflow-y: scroll;
-        max-height: 80vh;
+        max-height: 100%;
         box-sizing:border-box;
         display: flex;
         flex-direction: column;
@@ -74,26 +79,17 @@
         padding: 55px 56px 0px;
         width: 616px;
         flex: 100%;
-
-        max-height:calc( 100vh - 99px);
-
-        @include media_tablet{
-            max-height:calc( 100vh - 179px);
-        }
         
         @include media_mobile{
             padding: 30px 24px;
             margin:0 auto;
-
-            // max-height:calc( 100vh - 170px);
         }
+
         @include media(635px){
             width: auto;
         }
 
-        @include media(500px){
-            max-height:calc( 100vh - 168px);
-        }
+
         
 
         input{
