@@ -253,171 +253,173 @@ export default function EditInvoice(props:props) {
                     className={`${styles.write_invoice_third_wrapper}`}
                     onScroll={onScrollHandler}
                 >
-                    <p className={`${styles.title}`} >Edit <span>#</span>{invoiceData.id}</p>
-                    <div className={`${styles.from}`} >
-                        <p className={`${styles.section_title}`} >Bill From</p>
-                        <div className={`${styles.from_inputs}`} >
-                            <Input 
-                                label='Street Address'
-                                customStyles={styles.street_address}
-                                name={'senderAddress.street'}
-                                value={invoiceData.senderAddress.street}
-                                onChange={onChangeHandler}
-                            />
-                            <Input 
-                                label='City'
-                                customStyles={styles.city}
-                                name={'senderAddress.city'}
-                                value={invoiceData.senderAddress.city}
-                                onChange={onChangeHandler}
-                            />
-                            <Input 
-                                label='Post Code'
-                                customStyles={styles.post_code}
-                                name={'senderAddress.postCode'}
-                                value={invoiceData.senderAddress.postCode}
-                                onChange={onChangeHandler}
-                            />
-                            <Input 
-                                label='Country'
-                                customStyles={styles.country}
-                                name={'senderAddress.country'}
-                                value={invoiceData.senderAddress.country}
-                                onChange={onChangeHandler}
-                            />
-                        </div>
-                    </div>
-                    <div className={`${styles.to}`} >
-                        <p className={`${styles.section_title}`} >Bill To</p>
-                        <div className={`${styles.to_inputs}`} >
-                            <Input 
-                                label="Client's Name"
-                                customStyles={styles.client_name}
-                                name={'clientName'}
-                                value={invoiceData.clientName}
-                                onChange={onChangeHandler}
-                            />
-                            <Input 
-                                label="Client's Email"
-                                customStyles={styles.client_email}
-                                name={'clientEmail'}
-                                value={invoiceData.clientEmail}
-                                onChange={onChangeHandler}
-                            />
-                            <Input 
-                                label='Street Address'
-                                customStyles={styles.client_street_address}
-                                name={'clientAddress.street'}
-                                value={invoiceData.clientAddress.street}
-                                onChange={onChangeHandler}
-                            />
-                            <Input 
-                                label='City'
-                                name={'clientAddress.city'}
-                                value={invoiceData.clientAddress.city}
-                                onChange={onChangeHandler}
-                            />
-                            <Input 
-                                label='Post Code'
-                                name={'clientAddress.postCode'}
-                                value={invoiceData.clientAddress.postCode}
-                                onChange={onChangeHandler}
-                            />
-                            <Input 
-                                label='Country'
-                                customStyles={styles.client_country}
-                                name={'clientAddress.country'}
-                                value={invoiceData.clientAddress.country}
-                                onChange={onChangeHandler}
-                            />
-                        </div>
-                    </div>
-                    <div className={`${styles.other_infos}`} >
-                        <Input 
-                            label={'Invoice Date'}
-                            type={'date'}
-                            customStyles={`${styles.date} date`}
-                            name={'paymentDue'}
-                            value={invoiceData.paymentDue}
-                            onChange={onChangeHandler}
-                        />
-                        <div className={`${styles.payment}`} >
-                            <label className={`input_label ${styles.payment_label}`} >{'Payment Terms'}</label>
-                            <div ref={paymentWrapper} className={`${styles.payment_input}`} >
-                                <div 
-                                    className={`${styles.chosen_payment} input_input`} 
-                                    style={isPaymentOpen?borderColor:{}}
-                                    onClick={(e)=>{
-                                        togglePayment(prev=>!prev)
-                                        e.stopPropagation()
-                                    }}
-                                >
-                                    <p>{`Net ${invoiceData.paymentTerms} Day${invoiceData.paymentTerms === 1 ? '' : 's'}`}</p>
-                                    <i className={`fa-sharp fa-solid fa-angle-${isPaymentOpen ? "up" : "down"}`}></i>
-                                </div>
-                                {
-                                    isPaymentOpen &&
-                                    <div ref={paymentOptionsRef} className={`${styles.payment_options} payment_options`} >
-                                        <p onClick={()=>selectPayment(1)} >Net 1 Day</p>
-                                        <p onClick={()=>selectPayment(7)}>Net 7 Days</p>
-                                        <p onClick={()=>selectPayment(14)}>Net 14 Days</p>
-                                        <p onClick={()=>selectPayment(30)}>Net 30 Days</p>
-                                    </div>
-                                }
+                    <div>
+                        <p className={`${styles.title}`} >Edit <span>#</span>{invoiceData.id}</p>
+                        <div className={`${styles.from}`} >
+                            <p className={`${styles.section_title}`} >Bill From</p>
+                            <div className={`${styles.from_inputs}`} >
+                                <Input 
+                                    label='Street Address'
+                                    customStyles={styles.street_address}
+                                    name={'senderAddress.street'}
+                                    value={invoiceData.senderAddress.street}
+                                    onChange={onChangeHandler}
+                                />
+                                <Input 
+                                    label='City'
+                                    customStyles={styles.city}
+                                    name={'senderAddress.city'}
+                                    value={invoiceData.senderAddress.city}
+                                    onChange={onChangeHandler}
+                                />
+                                <Input 
+                                    label='Post Code'
+                                    customStyles={styles.post_code}
+                                    name={'senderAddress.postCode'}
+                                    value={invoiceData.senderAddress.postCode}
+                                    onChange={onChangeHandler}
+                                />
+                                <Input 
+                                    label='Country'
+                                    customStyles={styles.country}
+                                    name={'senderAddress.country'}
+                                    value={invoiceData.senderAddress.country}
+                                    onChange={onChangeHandler}
+                                />
                             </div>
                         </div>
-                        <Input 
-                            label='Project Description'
-                            customStyles={`${styles.project_description}`}
-                            name={'description'}
-                            value={invoiceData.description}
-                            onChange={onChangeHandler}
-                        />
-                    </div>
-                    <div className={`${styles.items_wraper}`} >
-                        <p className={`${styles.items_title}`} >Item List</p>
-                        <div className={`${styles.items_header}`} >
-                            <p className={`${styles.items_header_name}`} >Item Name</p>
-                            <p className={`${styles.items_header_qty}`} >Qty.</p>
-                            <p className={`${styles.items_header_price}`}>Price</p>
-                            <p className={`${styles.items_header_total}`} >Total</p>
-                        </div>
-                        {
-                            invoiceData.items.map((item,index)=>(
-                                <Item 
-                                    key={index}
-                                    itemData={item} 
-                                    writeHandler={(index:number,name:string,value:string|number)=>{
-                                        setInvoiceData((prevData:invoice):invoice=>{
-                                            return {
-                                                ...prevData,
-                                                items:prevData.items.map((item:item,index2)=>index2 === index ? {
-                                                    ...item,
-                                                    [name]:value
-                                                } : item)
-                                            }
-                                        })
-                                    }}
-                                    deleteHandler={(index:number)=>{
-                                        setInvoiceData((prevData:invoice):invoice=>{
-                                            return {
-                                                ...prevData,
-                                                items:prevData.items.filter((item:item,index2:number)=>index2 !== index)
-                                            }
-                                        })
-                                    }
-
-                                    }
-                                    index={index}
+                        <div className={`${styles.to}`} >
+                            <p className={`${styles.section_title}`} >Bill To</p>
+                            <div className={`${styles.to_inputs}`} >
+                                <Input 
+                                    label="Client's Name"
+                                    customStyles={styles.client_name}
+                                    name={'clientName'}
+                                    value={invoiceData.clientName}
+                                    onChange={onChangeHandler}
                                 />
-                            ))
-                        }
-                        <button 
-                            className={`${styles.new_item} normal_button`} 
-                            onClick={onAddItemHandler}
-                        >
-                            + Add New Item
-                        </button>
+                                <Input 
+                                    label="Client's Email"
+                                    customStyles={styles.client_email}
+                                    name={'clientEmail'}
+                                    value={invoiceData.clientEmail}
+                                    onChange={onChangeHandler}
+                                />
+                                <Input 
+                                    label='Street Address'
+                                    customStyles={styles.client_street_address}
+                                    name={'clientAddress.street'}
+                                    value={invoiceData.clientAddress.street}
+                                    onChange={onChangeHandler}
+                                />
+                                <Input 
+                                    label='City'
+                                    name={'clientAddress.city'}
+                                    value={invoiceData.clientAddress.city}
+                                    onChange={onChangeHandler}
+                                />
+                                <Input 
+                                    label='Post Code'
+                                    name={'clientAddress.postCode'}
+                                    value={invoiceData.clientAddress.postCode}
+                                    onChange={onChangeHandler}
+                                />
+                                <Input 
+                                    label='Country'
+                                    customStyles={styles.client_country}
+                                    name={'clientAddress.country'}
+                                    value={invoiceData.clientAddress.country}
+                                    onChange={onChangeHandler}
+                                />
+                            </div>
+                        </div>
+                        <div className={`${styles.other_infos}`} >
+                            <Input 
+                                label={'Invoice Date'}
+                                type={'date'}
+                                customStyles={`${styles.date} date`}
+                                name={'paymentDue'}
+                                value={invoiceData.paymentDue}
+                                onChange={onChangeHandler}
+                            />
+                            <div className={`${styles.payment}`} >
+                                <label className={`input_label ${styles.payment_label}`} >{'Payment Terms'}</label>
+                                <div ref={paymentWrapper} className={`${styles.payment_input}`} >
+                                    <div 
+                                        className={`${styles.chosen_payment} input_input`} 
+                                        style={isPaymentOpen?borderColor:{}}
+                                        onClick={(e)=>{
+                                            togglePayment(prev=>!prev)
+                                            e.stopPropagation()
+                                        }}
+                                    >
+                                        <p>{`Net ${invoiceData.paymentTerms} Day${invoiceData.paymentTerms === 1 ? '' : 's'}`}</p>
+                                        <i className={`fa-sharp fa-solid fa-angle-${isPaymentOpen ? "up" : "down"}`}></i>
+                                    </div>
+                                    {
+                                        isPaymentOpen &&
+                                        <div ref={paymentOptionsRef} className={`${styles.payment_options} payment_options`} >
+                                            <p onClick={()=>selectPayment(1)} >Net 1 Day</p>
+                                            <p onClick={()=>selectPayment(7)}>Net 7 Days</p>
+                                            <p onClick={()=>selectPayment(14)}>Net 14 Days</p>
+                                            <p onClick={()=>selectPayment(30)}>Net 30 Days</p>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <Input 
+                                label='Project Description'
+                                customStyles={`${styles.project_description}`}
+                                name={'description'}
+                                value={invoiceData.description}
+                                onChange={onChangeHandler}
+                            />
+                        </div>
+                        <div className={`${styles.items_wraper}`} >
+                            <p className={`${styles.items_title}`} >Item List</p>
+                            <div className={`${styles.items_header}`} >
+                                <p className={`${styles.items_header_name}`} >Item Name</p>
+                                <p className={`${styles.items_header_qty}`} >Qty.</p>
+                                <p className={`${styles.items_header_price}`}>Price</p>
+                                <p className={`${styles.items_header_total}`} >Total</p>
+                            </div>
+                            {
+                                invoiceData.items.map((item,index)=>(
+                                    <Item 
+                                        key={index}
+                                        itemData={item} 
+                                        writeHandler={(index:number,name:string,value:string|number)=>{
+                                            setInvoiceData((prevData:invoice):invoice=>{
+                                                return {
+                                                    ...prevData,
+                                                    items:prevData.items.map((item:item,index2)=>index2 === index ? {
+                                                        ...item,
+                                                        [name]:value
+                                                    } : item)
+                                                }
+                                            })
+                                        }}
+                                        deleteHandler={(index:number)=>{
+                                            setInvoiceData((prevData:invoice):invoice=>{
+                                                return {
+                                                    ...prevData,
+                                                    items:prevData.items.filter((item:item,index2:number)=>index2 !== index)
+                                                }
+                                            })
+                                        }
+
+                                        }
+                                        index={index}
+                                    />
+                                ))
+                            }
+                            <button 
+                                className={`${styles.new_item} normal_button`} 
+                                onClick={onAddItemHandler}
+                            >
+                                + Add New Item
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div ref={refButtons} style={{gap:'10px'}} className={`${styles.buttons} buttons`} >
