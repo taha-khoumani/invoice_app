@@ -4,6 +4,7 @@ import { MongoClient } from "mongodb";
 import { getServerSession } from "next-auth/next"
 import { authOptions } from './api/auth/[...nextauth]';
 import { Context } from 'vm';
+import defaultInvoices from "@/data.json"
 
 interface Props{
   stringInvoice:string,
@@ -70,7 +71,7 @@ export async function getServerSideProps({req,res}:Context) {
       //sign user up
       const result = await users.insertOne({
         userData:session.user,
-        invoices:[],
+        invoices:defaultInvoices,
       })
 
       client.close()
