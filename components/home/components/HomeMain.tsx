@@ -66,7 +66,8 @@ export default function HomeMain(props:Props) {
       invoicesNeededData.filter(invoice=> invoice.status === filter.toLocaleLowerCase() )
     )
 
-    return filteredData.reverse()
+    // return filteredData.reverse()
+    return filteredData
   }
 
   useEffect(()=>{
